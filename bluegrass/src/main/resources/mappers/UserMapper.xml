@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bluegrass.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.bluegrass.pojo.User" >
+    <constructor >
+      <idArg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_password" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_articlenum" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="user_phonenumber" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_email" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="exam_result" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_role" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_question" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_answer" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_test_value" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_id, user_name, user_password, user_articlenum, user_phonenumber, user_email, 
+    exam_result, user_role, user_question, user_answer, user_test_value, create_time, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bluegrass.pojo.User" >
+    insert into user (user_id, user_name, user_password, 
+      user_articlenum, user_phonenumber, user_email, 
+      exam_result, user_role, user_question, 
+      user_answer, user_test_value, create_time, 
+      update_time)
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
+      #{userArticlenum,jdbcType=INTEGER}, #{userPhonenumber,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, 
+      #{examResult,jdbcType=VARCHAR}, #{userRole,jdbcType=VARCHAR}, #{userQuestion,jdbcType=VARCHAR}, 
+      #{userAnswer,jdbcType=VARCHAR}, #{userTestValue,jdbcType=VARCHAR}, now(),
+      now())
+  </insert>
+  <insert id="insertSelective" parameterType="com.bluegrass.pojo.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userPassword != null" >
+        user_password,
+      </if>
+      <if test="userArticlenum != null" >
+        user_articlenum,
+      </if>
+      <if test="userPhonenumber != null" >
+        user_phonenumber,
+      </if>
+      <if test="userEmail != null" >
+        user_email,
+      </if>
+      <if test="examResult != null" >
+        exam_result,
+      </if>
+      <if test="userRole != null" >
+        user_role,
+      </if>
+      <if test="userQuestion != null" >
+        user_question,
+      </if>
+      <if test="userAnswer != null" >
+        user_answer,
+      </if>
+      <if test="userTestValue != null" >
+        user_test_value,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userArticlenum != null" >
+        #{userArticlenum,jdbcType=INTEGER},
+      </if>
+      <if test="userPhonenumber != null" >
+        #{userPhonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null" >
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="examResult != null" >
+        #{examResult,jdbcType=VARCHAR},
+      </if>
+      <if test="userRole != null" >
+        #{userRole,jdbcType=VARCHAR},
+      </if>
+      <if test="userQuestion != null" >
+        #{userQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="userAnswer != null" >
+        #{userAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="userTestValue != null" >
+        #{userTestValue,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        now(),
+      </if>
+      <if test="updateTime != null" >
+        now(),
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bluegrass.pojo.User" >
+    update user
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        user_password = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userArticlenum != null" >
+        user_articlenum = #{userArticlenum,jdbcType=INTEGER},
+      </if>
+      <if test="userPhonenumber != null" >
+        user_phonenumber = #{userPhonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null" >
+        user_email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="examResult != null" >
+        exam_result = #{examResult,jdbcType=VARCHAR},
+      </if>
+      <if test="userRole != null" >
+        user_role = #{userRole,jdbcType=VARCHAR},
+      </if>
+      <if test="userQuestion != null" >
+        user_question = #{userQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="userAnswer != null" >
+        user_answer = #{userAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="userTestValue != null" >
+        user_test_value = #{userTestValue,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = now(),
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bluegrass.pojo.User" >
+    update user
+    set user_name = #{userName,jdbcType=VARCHAR},
+      user_password = #{userPassword,jdbcType=VARCHAR},
+      user_articlenum = #{userArticlenum,jdbcType=INTEGER},
+      user_phonenumber = #{userPhonenumber,jdbcType=VARCHAR},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      exam_result = #{examResult,jdbcType=VARCHAR},
+      user_role = #{userRole,jdbcType=VARCHAR},
+      user_question = #{userQuestion,jdbcType=VARCHAR},
+      user_answer = #{userAnswer,jdbcType=VARCHAR},
+      user_test_value = #{userTestValue,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = now()
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+
+  <select id="checkUsername" parameterType="string" resultType="int">
+      select count(1) from user
+      where user_name = #{username}
+  </select>
+
+  <select id="checkEmail" parameterType="string" resultType="int">
+      select count(1) from user
+      where user_email = #{email}
+  </select>
+
+  <select id="selectLogin" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where user_name =#{username}
+    and user_password = #{password}
+  </select>
+
+
+  <select id="selectQuestionByUsername" parameterType="string" resultType="string">
+    select user_question
+    from user
+    where
+    user_name = #{username}
+  </select>
+
+  <select id="checkAnswer" parameterType="map" resultType="java.lang.Integer">
+
+    select count(1)
+    from user
+    where user_name = #{username}
+    and user_question = #{question}
+    and user_answer = #{answer}
+  </select>
+
+  <update id="updatePasswordByUsername" parameterType="map">
+    update user
+    set user_password = #{password},update_time = now()
+    where user_name = #{username}
+
+  </update>
+
+  <select id="checkPassword" parameterType="map" resultType="int">
+    select  count(1)
+    from user
+    where user_id = #{userId}
+    and user_password = #{password}
+
+  </select>
+
+  <select id="checkEmailByUserId" parameterType="map" resultType="java.lang.Integer">
+      select count(1) from user
+      where user_email = #{userEmail}
+      and user_id != #{userId}
+
+  </select>
+
+  <select id="checkUserId" parameterType="int" resultType="int">
+    select count(1)
+    from user
+    where
+    user_id = #{userId}
+  </select>
+
+  <update id="updateResultByUserId" parameterType="map">
+    update user
+    set exam_result = #{result}
+    where
+    user_id = #{userId}
+  </update>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
