@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>项目申报平台</title>
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+    <script type="text/javascript"
+            src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM.js"></script>
+    <script type="text/javascript"
+            src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">项目申报平台</div>
+
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="upload/photo.png" class="layui-nav-img">
+                    贤心
+                </a>
+            </li>
+            <li class="layui-nav-item"><a href="TeacherLogin.html">退出登陆</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">主页</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" class="allPorjects">所有项目</a></dd>
+                        <dd><a href="javascript:;" class="joinableProjects">可申报项目</a></dd>
+                        <dd><a href="javascript:;" class="publishedProjects">已提交项目</a></dd>
+                    </dl>
+                </li>
+                <!--<li class="layui-nav-item">-->
+                <!--<a href="javascript:;">学生菜单</a>-->
+                <!--<dl class="layui-nav-child">-->
+                <!--<dd><a href="javascript:;" class="studentSelfInfo">个人信息</a></dd>-->
+                <!--<dd><a href="javascript:;" class="studentProjects">已申报项目</a></dd>-->
+                <!--</dl>-->
+                <!--</li>-->
+
+                <li class="layui-nav-item">
+                    <a href="javascript:;">教师菜单</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" class="teacherSelfInfo">个人信息</a></dd>
+                        <dd><a href="javascript:;" class="teacherProjects ">已申请项目</a></dd>
+                        <dd><a href="javascript:;" class="toPublish" layui-event="edit" type="button">我要发布</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body content">
+
+        <!--<div style="padding: 15px;">内容主体区域</div>-->
+    </div>
+</div>
+<!--<script type="text/javascript" src="./layui/layui.all.js"></script>-->
+<script src="./layui/layui.all.js"></script>
+<script type="text/html" id="barDemo">
+    <div>
+        <a class="layui-btn layui-btn-primary layui-btn-xs select" lay-event="detail">查看</a>
+        <a class="layui-btn layui-btn-xs edit" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs del" lay-event="del">删除</a>
+    </div>
+</script>
+<script type="text/html" id="barDemo2">
+    <div>
+        <a class="layui-btn layui-btn-primary layui-btn-xs select" lay-event="deatil2">查看</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs del" lay-event="del2">删除</a>
+    </div>
+</script>
+<script type="text/html" id="barDemo3">
+    <div>
+        <a class="layui-btn layui-btn-xs flag" lay-event="flag">修改标记</a>
+    </div>
+</script>
+<script type="text/html" id="barDemo4">
+    <div>
+        <a class="layui-btn layui-btn-primary layui-btn-xs select" lay-event="detail">查看</a>
+        <a class="layui-btn layui-btn-xs edit" lay-event="fabu">发布</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs del" lay-event="del">删除</a>
+    </div>
+</script>
+<script type="text/javascript">
+    //JavaScript代码区域
+    var $ = layui.jquery;
+    var element = layui.element;
+    var table = layui.table;
+    $(".allPorjects").click(function () {
+        $(".content").empty().append($('<table id="demo" lay-filter="test"></table>'));
+        table.render({
+            elem: '#demo'
+            , height: 550
+            , url: '/getArticle1'//数据接口
+            , page: true //开启分页
+            , cols: [[ //表头
+                {field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left'}
+                , {field: 'p_number', title: '项目编号', width: 100, sort: true}
+                , {field: 'p_name', title: '项目名称', width: 90}
+                , {field: 'p_group', title: '项目小组成员', width: 120}
+                , {field: 'p_groupLeader', title: '项目小组组长', width: 120}
+                , {field: 'p_tutor', title: '项目导师', width: 90}
+                , {field: 'p_firstTutor', title: '项目首席导师', width: 135}
+                , {field: 'p_declareDate', title: '项目创建时间', width: 120}
+                , {field: 'p_updateDate', title: '项目修改时间', width: 120}
+                , {field: 'p_insitute', title: '项目学院', width: '90'}
+                , {field: 'p_profiles', title: '项目信息', width: '90'}
+                , {field: 'p_remarks', title: '项目标注(可否申报)', width: '160'}
+//                , {fixed: 'right', width: 300, align: 'center', toolbar: '#barDemo'}
+            ]]
+        });
+    })
+
+
+    $(".joinableProjects").click(function () {
+        $(".content").empty().append($('<table id="demo2" lay-filter="test2"></table>'));
+        table.render({
+            elem: '#demo2'
+            , height: 550
+            , url: '/getArticle2'//数据接口
+            , page: true //开启分页
+            , cols: [[ //表头flag0
+                {field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left'}
+                , {field: 'p_number', title: '项目编号', width: 100, sort: true}
+                , {field: 'p_name', title: '项目名称', width: 90}
+                , {field: 'p_group', title: '项目小组成员', width: 120}
+                , {field: 'p_groupLeader', title: '项目小组组长', width: 120}
+                , {field: 'p_tutor', title: '项目导师', width: 90}
+                , {field: 'p_firstTutor', title: '项目首席导师', width: 135}
+                , {field: 'p_declareDate', title: '项目创建时间', width: 120}
+                , {field: 'p_updateDate', title: '项目修改时间', width: 120}
+                , {field: 'p_insitute', title: '项目学院', width: '90'}
+                , {field: 'p_profiles', title: '项目信息', width: '90'}
+                , {field: 'p_remarks', title: '项目标注(可否申报)', width: '160'}
+            ]]
+        });
+    })
+
+    $(".publishedProjects").click(function () {
+        $(".content").empty().append($('<table id="demo" lay-filter="test4"></table>'));
+        table.render({
+            elem: '#demo'
+            , height: 550
+            , url: '/getArticle3'//数据接口
+            , page: true //开启分页
+            , cols: [[ //表头
+                {field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left'}
+                , {field: 'p_number', title: '项目编号', width: 100, sort: true}
+                , {field: 'p_name', title: '项目名称', width: 90}
+                , {field: 'p_group', title: '项目小组成员', width: 120}
+                , {field: 'p_groupLeader', title: '项目小组组长', width: 120}
+                , {field: 'p_tutor', title: '项目导师', width: 90}
+                , {field: 'p_firstTutor', title: '项目首席导师', width: 135}
+                , {field: 'p_declareDate', title: '项目创建时间', width: 120}
+                , {field: 'p_updateDate', title: '项目修改时间', width: 120}
+                , {field: 'p_insitute', title: '项目学院', width: '90'}
+                , {field: 'p_profiles', title: '项目信息', width: '90'}
+                , {field: 'p_remarks', title: '项目标注(可否申报)', width: '160'}
+            ]]
+        });
+    })
+
+
+    //    $(".studentSelfInfo").click(function () {
+    //        $(".content").empty().append($('<table id="demo" lay-filter="test3"></table>'));
+    //        table.render({
+    //            elem: '#demo'
+    //            , height: 550
+    //            , url: '/getLiuyan'//数据接口
+    //            , page: true //开启分页
+    //            , cols: [[ //表头
+    //                {field: 'id', title: 'ID', width: 70, sort: true, fixed: 'left'}
+    //                , {field: 's_name', title: '学生姓名', width: 120}
+    //                , {field: 's_number', title: '学生学号', width: 120, sort: true}
+    //                , {field: 's_sex', title: '性别', width: 300}
+    //                , {field: 's_insitute', title: '学院', width: 100}
+    //                , {field: 's_major', title: '专业', width: 100, align: 'center', toolbar: '#barDemo2'}
+    //                , {field: 's_class', title: '班级', width: 100}
+    //                , {field: 's_telephone', title: '电话', width: 100}
+    //                , {field: 's_remarks', title: '备注', width: 100}
+    //
+    //            ]]
+    //        });
+    //    })
+
+    //    $(".studentProjects").click(function () {
+    //        $(".content").empty().append($('<table id="demo" lay-filter="test"></table>'));
+    //        table.render({
+    //            elem: '#demo'
+    //            , height: 550
+    //            , url: '/getFabu'//数据接口
+    //            , page: true //开启分页
+    //            , cols: [[ //表头
+    //                {field: 'id', title: 'ID', width: 70, sort: true, fixed: 'left'}
+    //                , {field: 'p_number', title: '项目编号', width: 120, sort: true}
+    //                , {field: 'p_name', title: '项目名称', width: 300}
+    //            ]]
+    //        });
+    //
+    //    })
+
+    $(".teacherSelfInfo").click(function () {
+        $(".content").empty().append($('<table id="demo" lay-filter="test"></table>'));
+        table.render({
+            elem: '#demo'
+            , height: 550
+            , methon: 'post'
+            , url: '/get_teachers_info.do'//数据接口
+            , page: true //开启分页
+            , cols: [[ //表头
+                {field: 'id', title: 'ID', width: 70, sort: true, fixed: 'left'}
+                , {field: 'tName', title: '教师姓名', width: 120}
+                , {field: 'tNumber', title: '教职工号', width: 120, sort: true}
+                , {field: 'tSex', title: '性别', width: 300}
+                , {field: 'tInsitute', title: '学院', width: 100}
+                , {field: 'tMajor', title: '专业', width: 100, align: 'center', toolbar: '#barDemo2'}
+                , {field: 'tClass', title: '班级', width: 100}
+                , {field: 'tTelephone', title: '电话', width: 100}
+                , {field: 'tRemarks', title: '备注', width: 100}
+
+            ]]
+        });
+    })
+
+    $(".teacherProjects").click(function () {
+        $(".content").empty().append($('<table id="demo" lay-filter="test"></table>'));
+        table.render({
+            elem: '#demo'
+            , height: 550
+            , method: 'post'
+            , url: '/getFabu'//数据接口
+            , page: true //开启分页
+            , cols: [[ //表头
+                {field: 'id', title: 'ID', width: 70, sort: true, fixed: 'left'}
+                , {field: 'pNumber', title: '项目编号', width: 120, sort: true}
+                , {field: 'pName', title: '项目名称', width: 300}
+            ]]
+        });
+    })
+    $(".toPublish").click(function () {
+        $(".content").empty().append($('<table id="demo" lay-filter="test"></table>'));
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-demo',
+            title: '用户文章',
+            shadeClose: true,
+            anim: 2,
+            shade: false,
+            //maxmin: true, //开启最大化最小化按钮
+            area: ['300px', '500px'],
+            content:
+            '<form id="editFrame" class="layui-form bianji" action="teachers/add_project.do">\n' +
+            '        <div class="layui-form-item">\n' +
+            '            <label class="layui-form-label">项目名称</label>\n' +
+            '            <div class="layui-input-block">\n' +
+            '                <input type="text" name="pName" required lay-verify="required" autocomplete="off" class="layui-input">\n' +
+            '            </div>\n' +
+            '        </div>\n' +
+            '        <div class="layui-form-item">\n' +
+            '            <label class="layui-form-label">项目编号</label>\n' +
+            '            <div class="layui-input-block">\n' +
+            '                <input type="text" name="pNumber"  required lay-verify="required"  autocomplete="off" class="layui-input">\n' +
+            '            </div>\n' +
+            '        </div>\n' +
+            '        <div class="layui-form-item">\n' +
+            '            <label class="layui-form-label">项目学院</label>\n' +
+            '            <div class="layui-input-block">\n' +
+            '                <input type="text" name="pInstitute" required  lay-verify="required"  autocomplete="off" class="layui-input psex" >\n' +
+            '            </div>\n' +
+            '        </div>\n' +
+            '        <div class="layui-form-item">\n' +
+            '            <label class="layui-form-label">项目备注</label>\n' +
+            '            <div class="layui-input-block">\n' +
+            '                <input type="text" name="pProfiles" required  lay-verify="required" autocomplete="off" class="layui-input">\n' +
+            '            </div>\n' +
+            '        </div>\n' +
+            '        <div class="layui-form-item">\n' +
+            '            <label class="layui-form-label">项目指导教师职工号</label>\n' +
+            '            <div class="layui-input-block">\n' +
+            '                <input type="text" name="pTutor" required  lay-verify="required" placeholder="按‘，’划分" autocomplete="off" class="layui-input">\n' +
+            '            </div>\n' +
+            '        </div>\n' +
+            '        <div class="layui-form-item">\n' +
+            '            <label class="layui-form-label">职业</label>\n' +
+            '            <div class="layui-input-block">\n' +
+            '                <input type="text" name="profession" required  lay-verify="required"  autocomplete="off" class="layui-input">\n' +
+            '            </div>\n' +
+            '        </div>\n' +
+            '      <div class="layui-form-item">\n ' +
+            '         <div class="layui-input-block">\n ' +
+            ' <button class="layui-btn btn" lay-submit lay-filter="formDemo">立即提交</button>\n ' +
+            ' <button type="reset" class="layui-btn layui-btn-primary">重置</button>\n ' +
+            ' </div>\n ' +
+            ' </div>\n ' +
+            ' </form>\n'
+        });
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.dao.TeachersMapper" >
+  <resultMap id="BaseResultMap" type="com.project.pojo.Teachers" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="t_number" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_sex" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_institute" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_major" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_professionalTitle" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_telephone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_password" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_question" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_answer" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_rule" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_remarks" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, t_number, t_name, t_sex, t_institute, t_major, t_professionalTitle, t_telephone, 
+    t_password, t_question, t_answer, t_rule, t_remarks
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from teachers
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from teachers
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.project.pojo.Teachers" >
+    insert into teachers (id, t_number, t_name, 
+      t_sex, t_institute, t_major, 
+      t_professionalTitle, t_telephone, t_password, 
+      t_question, t_answer, t_rule, 
+      t_remarks)
+    values (#{id,jdbcType=INTEGER}, #{tNumber,jdbcType=VARCHAR}, #{tName,jdbcType=VARCHAR}, 
+      #{tSex,jdbcType=VARCHAR}, #{tInstitute,jdbcType=VARCHAR}, #{tMajor,jdbcType=VARCHAR}, 
+      #{tProfessionaltitle,jdbcType=VARCHAR}, #{tTelephone,jdbcType=VARCHAR}, #{tPassword,jdbcType=VARCHAR}, 
+      #{tQuestion,jdbcType=VARCHAR}, #{tAnswer,jdbcType=VARCHAR}, #{tRule,jdbcType=VARCHAR}, 
+      #{tRemarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.project.pojo.Teachers" >
+    insert into teachers
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="tNumber != null" >
+        t_number,
+      </if>
+      <if test="tName != null" >
+        t_name,
+      </if>
+      <if test="tSex != null" >
+        t_sex,
+      </if>
+      <if test="tInstitute != null" >
+        t_institute,
+      </if>
+      <if test="tMajor != null" >
+        t_major,
+      </if>
+      <if test="tProfessionaltitle != null" >
+        t_professionalTitle,
+      </if>
+      <if test="tTelephone != null" >
+        t_telephone,
+      </if>
+      <if test="tPassword != null" >
+        t_password,
+      </if>
+      <if test="tQuestion != null" >
+        t_question,
+      </if>
+      <if test="tAnswer != null" >
+        t_answer,
+      </if>
+      <if test="tRule != null" >
+        t_rule,
+      </if>
+      <if test="tRemarks != null" >
+        t_remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="tNumber != null" >
+        #{tNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="tName != null" >
+        #{tName,jdbcType=VARCHAR},
+      </if>
+      <if test="tSex != null" >
+        #{tSex,jdbcType=VARCHAR},
+      </if>
+      <if test="tInstitute != null" >
+        #{tInstitute,jdbcType=VARCHAR},
+      </if>
+      <if test="tMajor != null" >
+        #{tMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="tProfessionaltitle != null" >
+        #{tProfessionaltitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tTelephone != null" >
+        #{tTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="tPassword != null" >
+        #{tPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="tQuestion != null" >
+        #{tQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="tAnswer != null" >
+        #{tAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="tRule != null" >
+        #{tRule,jdbcType=VARCHAR},
+      </if>
+      <if test="tRemarks != null" >
+        #{tRemarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.project.pojo.Teachers" >
+    update teachers
+    <set >
+      <if test="tNumber != null" >
+        t_number = #{tNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="tName != null" >
+        t_name = #{tName,jdbcType=VARCHAR},
+      </if>
+      <if test="tSex != null" >
+        t_sex = #{tSex,jdbcType=VARCHAR},
+      </if>
+      <if test="tInstitute != null" >
+        t_institute = #{tInstitute,jdbcType=VARCHAR},
+      </if>
+      <if test="tMajor != null" >
+        t_major = #{tMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="tProfessionaltitle != null" >
+        t_professionalTitle = #{tProfessionaltitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tTelephone != null" >
+        t_telephone = #{tTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="tPassword != null" >
+        t_password = #{tPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="tQuestion != null" >
+        t_question = #{tQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="tAnswer != null" >
+        t_answer = #{tAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="tRule != null" >
+        t_rule = #{tRule,jdbcType=VARCHAR},
+      </if>
+      <if test="tRemarks != null" >
+        t_remarks = #{tRemarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.project.pojo.Teachers" >
+    update teachers
+    set t_number = #{tNumber,jdbcType=VARCHAR},
+      t_name = #{tName,jdbcType=VARCHAR},
+      t_sex = #{tSex,jdbcType=VARCHAR},
+      t_institute = #{tInstitute,jdbcType=VARCHAR},
+      t_major = #{tMajor,jdbcType=VARCHAR},
+      t_professionalTitle = #{tProfessionaltitle,jdbcType=VARCHAR},
+      t_telephone = #{tTelephone,jdbcType=VARCHAR},
+      t_password = #{tPassword,jdbcType=VARCHAR},
+      t_question = #{tQuestion,jdbcType=VARCHAR},
+      t_answer = #{tAnswer,jdbcType=VARCHAR},
+      t_rule = #{tRule,jdbcType=VARCHAR},
+      t_remarks = #{tRemarks,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="checkNumber" parameterType="string" resultType="int">
+    select count(1)
+    from teachers
+    where t_number = #{number}
+  </select>
+
+  <select id="selectLogin" parameterType="map" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from teachers
+    where t_number = #{number}
+    and t_password = #{password}
+  </select>
+  
+  <select id="selectQuestionByUsername" parameterType="string" resultType="string">
+    select t_question
+    from teachers
+    where t_number = #{number}
+  </select>
+
+  <select id="checkAnswer" parameterType="map" resultType="int">
+    select count(1)
+    from teachers
+    where t_number = #{number}
+    and t_question = #{question}
+    and t_answer = #{answer}
+  </select>
+
+  <update id="updatePasswordByTeachersNumber" parameterType="map">
+    update teachers
+    set t_password = #{password}
+    where t_number = #{number}
+  </update>
+
+  <select id="checkPassword" parameterType="map" resultType="int">
+    select count(1)
+    from teachers
+    where t_number = #{number}
+    and t_password = #{password}
+  </select>
+
+  <delete id="deleteByNumber" parameterType="string">
+    delete from teachers
+    where t_number = #{number}
+  </delete>
+
+  <select id="selectByNumber" parameterType="string" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from teachers
+    where t_number = #{number}
+  </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

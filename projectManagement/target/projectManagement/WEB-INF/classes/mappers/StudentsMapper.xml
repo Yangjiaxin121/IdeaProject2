@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.dao.StudentsMapper" >
+  <resultMap id="BaseResultMap" type="com.project.pojo.Students" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="s_number" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="s_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="s_sex" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="s_institute" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="s_major" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="s_class" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="s_telephone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="s_password" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="s_question" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="s_answer" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="s_rule" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="s_remarks" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="s_messageBoard" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, s_number, s_name, s_sex, s_institute, s_major, s_class, s_telephone, s_password, 
+    s_question, s_answer, s_rule, s_remarks, s_messageBoard
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from students
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from students
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.project.pojo.Students" >
+    insert into students (id, s_number, s_name, 
+      s_sex, s_institute, s_major, 
+      s_class, s_telephone, s_password, 
+      s_question, s_answer, s_rule, 
+      s_remarks, s_messageBoard)
+    values (#{id,jdbcType=INTEGER}, #{sNumber,jdbcType=VARCHAR}, #{sName,jdbcType=VARCHAR}, 
+      #{sSex,jdbcType=VARCHAR}, #{sInstitute,jdbcType=VARCHAR}, #{sMajor,jdbcType=VARCHAR}, 
+      #{sClass,jdbcType=VARCHAR}, #{sTelephone,jdbcType=VARCHAR}, #{sPassword,jdbcType=VARCHAR}, 
+      #{sQuestion,jdbcType=VARCHAR}, #{sAnswer,jdbcType=VARCHAR}, #{sRule,jdbcType=VARCHAR}, 
+      #{sRemarks,jdbcType=VARCHAR}, #{sMessageboard,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.project.pojo.Students" >
+    insert into students
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sNumber != null" >
+        s_number,
+      </if>
+      <if test="sName != null" >
+        s_name,
+      </if>
+      <if test="sSex != null" >
+        s_sex,
+      </if>
+      <if test="sInstitute != null" >
+        s_institute,
+      </if>
+      <if test="sMajor != null" >
+        s_major,
+      </if>
+      <if test="sClass != null" >
+        s_class,
+      </if>
+      <if test="sTelephone != null" >
+        s_telephone,
+      </if>
+      <if test="sPassword != null" >
+        s_password,
+      </if>
+      <if test="sQuestion != null" >
+        s_question,
+      </if>
+      <if test="sAnswer != null" >
+        s_answer,
+      </if>
+      <if test="sRule != null" >
+        s_rule,
+      </if>
+      <if test="sRemarks != null" >
+        s_remarks,
+      </if>
+      <if test="sMessageboard != null" >
+        s_messageBoard,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sNumber != null" >
+        #{sNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="sName != null" >
+        #{sName,jdbcType=VARCHAR},
+      </if>
+      <if test="sSex != null" >
+        #{sSex,jdbcType=VARCHAR},
+      </if>
+      <if test="sInstitute != null" >
+        #{sInstitute,jdbcType=VARCHAR},
+      </if>
+      <if test="sMajor != null" >
+        #{sMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="sClass != null" >
+        #{sClass,jdbcType=VARCHAR},
+      </if>
+      <if test="sTelephone != null" >
+        #{sTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="sPassword != null" >
+        #{sPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="sQuestion != null" >
+        #{sQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="sAnswer != null" >
+        #{sAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="sRule != null" >
+        #{sRule,jdbcType=VARCHAR},
+      </if>
+      <if test="sRemarks != null" >
+        #{sRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="sMessageboard != null" >
+        #{sMessageboard,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.project.pojo.Students" >
+    update students
+    <set >
+      <if test="sNumber != null" >
+        s_number = #{sNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="sName != null" >
+        s_name = #{sName,jdbcType=VARCHAR},
+      </if>
+      <if test="sSex != null" >
+        s_sex = #{sSex,jdbcType=VARCHAR},
+      </if>
+      <if test="sInstitute != null" >
+        s_institute = #{sInstitute,jdbcType=VARCHAR},
+      </if>
+      <if test="sMajor != null" >
+        s_major = #{sMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="sClass != null" >
+        s_class = #{sClass,jdbcType=VARCHAR},
+      </if>
+      <if test="sTelephone != null" >
+        s_telephone = #{sTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="sPassword != null" >
+        s_password = #{sPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="sQuestion != null" >
+        s_question = #{sQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="sAnswer != null" >
+        s_answer = #{sAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="sRule != null" >
+        s_rule = #{sRule,jdbcType=VARCHAR},
+      </if>
+      <if test="sRemarks != null" >
+        s_remarks = #{sRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="sMessageboard != null" >
+        s_messageBoard = #{sMessageboard,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.project.pojo.Students" >
+    update students
+    set s_number = #{sNumber,jdbcType=VARCHAR},
+      s_name = #{sName,jdbcType=VARCHAR},
+      s_sex = #{sSex,jdbcType=VARCHAR},
+      s_institute = #{sInstitute,jdbcType=VARCHAR},
+      s_major = #{sMajor,jdbcType=VARCHAR},
+      s_class = #{sClass,jdbcType=VARCHAR},
+      s_telephone = #{sTelephone,jdbcType=VARCHAR},
+      s_password = #{sPassword,jdbcType=VARCHAR},
+      s_question = #{sQuestion,jdbcType=VARCHAR},
+      s_answer = #{sAnswer,jdbcType=VARCHAR},
+      s_rule = #{sRule,jdbcType=VARCHAR},
+      s_remarks = #{sRemarks,jdbcType=VARCHAR},
+      s_messageBoard = #{sMessageboard,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="checkNumber" parameterType="string" resultType="int">
+    select count(1)
+    from students
+    where s_number = #{number}
+  </select>
+
+  <select id="selectLogin" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from students
+    where
+    s_number = #{number}
+    and
+    s_password = #{password}
+  </select>
+
+
+  <select id="checkTel" parameterType="string" resultType="int">
+    select count(1)
+    from students
+    where
+    s_telephone = #{tel}
+  </select>
+
+  <select id="selectQuestionByUsername" parameterType="string" resultType="string">
+    select s_question
+    from students
+    where s_number = #{number}
+  </select>
+
+  <select id="checkAnswer" parameterType="map" resultType="int">
+    select count(1)
+    from students
+    where s_number = #{number}
+    and s_question = #{question}
+    and s_answer = #{answer}
+  </select>
+
+  <update id="updatePasswordByStudentsNumber" parameterType="map">
+
+    update students
+    set s_password = #{md5Password}
+    where s_number = #{number}
+  </update>
+
+  <select id="checkPassword" parameterType="map" resultType="int">
+    select count(1)
+    from students
+    where s_number = #{number}
+    and s_password = #{password}
+  </select>
+
+  <select id="checkTelByStudentsId" parameterType="map" resultType="int">
+      select count(1) from students
+      where s_telephone = #{tel}
+      and id != #{id}
+  </select>
+
+  <delete id="deleteByNumber" parameterType="string">
+    delete from students
+    where s_number = #{number}
+  </delete>
+
+  <select id="selectByNumber" parameterType="string" resultMap="BaseResultMap">
+    select  <include refid="Base_Column_List"/>
+    from students
+    where s_number = #{number}
+  </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
