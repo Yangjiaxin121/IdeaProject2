@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/students/")
@@ -57,12 +59,14 @@ public class StudentsController {
 
     @RequestMapping(value = "get_students_info.do", method = RequestMethod.POST)
     @ResponseBody
-    public ServerResponse<Students> getUserInfo(HttpSession session){
+    public ServerResponse getUserInfo(HttpSession session){
+        List<Students> list=new ArrayList();
         Students user = (Students) session.getAttribute(Const.CURRENT_USER);
         if (user == null){
             return ServerResponse.createByErrorMessage("用户未登录,无法获取用户信息");
         }
-        return ServerResponse.createBySuccess(user);
+        list.add(user);
+        return ServerResponse.createBySuccess(list);
     }
 
     @RequestMapping("forget_get_question")

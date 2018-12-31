@@ -4,6 +4,8 @@ import com.project.pojo.Students;
 import com.project.pojo.Teachers;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface TeachersMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -32,4 +34,6 @@ public interface TeachersMapper {
     int deleteByNumber(String number);
 
     Teachers selectByNumber(String number);
+
+    List<Teachers> selectAllTeachers();
 }

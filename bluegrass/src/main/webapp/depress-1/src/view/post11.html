@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>文件</title>
+</head>
+<script src="https://cdn.bootcss.com/jquery/1.8.3/jquery.min.js"></script>
+<body>
+	<form id="upfile">
+		选择一个文件:
+		<input type="file" name="file" id="upload" />
+		<br/><br/>
+		<input id="uploadFile" value="上传" type="button"/>
+	</form>
+	
+	<div id="upFile"></div>
+</body>
+<script type="text/javascript">
+ 
+$("#uploadFile").click(function(){
+	var formData = new FormData($("#upfile")[0]);
+	//formData.set('file', document.getElementById("upload").files[0]);
+	$.ajax({
+        url: '',
+        type: 'POST',
+        cache: false,
+        data: formData,
+        processData: false,
+        contentType: false
+    }).done(function(res) {
+        
+    });
+});
+</script>
+</html>

@@ -36,4 +36,8 @@ public interface IAdminService {
 
     ServerResponse getProjectByStatus(String status);
 
+    ServerResponse getAllTeachers();
+
+    ServerResponse getAllStudents();
+
     }

@@ -30,4 +30,7 @@ public interface ITeacherService {
 
     ServerResponse getTeacherApplied(Teachers teachers);
 
+    ServerResponse deleteStudentByStudentNumber(Teachers teachers, String studentNumber, Integer projectId);
+
+
     }

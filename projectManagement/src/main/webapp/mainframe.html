@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>项目申报平台</title>
     <link rel="stylesheet" href="./layui/css/layui.css">
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
-    <script type="text/javascript"
-            src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM.js"></script>
-    <script type="text/javascript"
-            src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+    <!--<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>-->
+    <!--<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>-->
+    <!--<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>-->
+    <!--<script type="text/javascript"-->
+            <!--src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>-->
+    <!--<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>-->
+    <!--<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>-->
+    <!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM.js"></script>-->
+    <!--<script type="text/javascript"-->
+            <!--src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>-->
+    <!--<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>-->
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -29,7 +29,7 @@
                     贤心
                 </a>
             </li>
-            <li class="layui-nav-item"><a href="TeacherLogin.html">退出登陆</a></li>
+            <li class="layui-nav-item"><a href="index.html">退出登陆</a></li>
         </ul>
     </div>
 
@@ -47,17 +47,17 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;">学生菜单</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" class="studentSelfInfo">个人信息</a></dd>
-                        <dd><a href="javascript:;" class="studentProjects">已申报项目</a></dd>
+                        <dd><a href="javascript:;" class="studentSelfInfo">学生信息</a></dd>
+                        <!--<dd><a href="javascript:;" class="studentProjects">已申报项目</a></dd>-->
                     </dl>
                 </li>
 
                 <li class="layui-nav-item">
                     <a href="javascript:;">教师菜单</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" class="teacherSelfInfo">个人信息</a></dd>
-                        <dd><a href="javascript:;" class="teacherProjects ">已申请项目</a></dd>
-                        <dd><a href="javascript:;" class="toPublish" layui-event="edit" type="button">我要发布</a></dd>
+                        <dd><a href="javascript:;" class="TeacherInfos">选择教师信息</a></dd>
+                        <dd><a href="javascript:;" class="addTeacher ">添加教师</a></dd>
+                        <!--<dd><a href="javascript:;" class="toPublish" layui-event="edit" type="button">我要发布</a></dd>-->
                     </dl>
                 </li>
             </ul>
@@ -71,58 +71,50 @@
 </div>
 <!--<script type="text/javascript" src="./layui/layui.all.js"></script>-->
 <script src="./layui/layui.all.js"></script>
+<!--<script type="text/html" id="barDemo">-->
+<!--<div>-->
+<!--<a class="layui-btn layui-btn-primary layui-btn-xs select" lay-event="detail">查看</a>-->
+<!--<a class="layui-btn layui-btn-xs edit" lay-event="edit">编辑</a>-->
+<!--<a class="layui-btn layui-btn-danger layui-btn-xs del" lay-event="del">删除</a>-->
+<!--</div>-->
+<!--</script>-->
 <script type="text/html" id="barDemo">
     <div>
-        <a class="layui-btn layui-btn-primary layui-btn-xs select" lay-event="detail">查看</a>
-        <a class="layui-btn layui-btn-xs edit" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-primary layui-btn-xs select" lay-event="deatil">查看</a>
         <a class="layui-btn layui-btn-danger layui-btn-xs del" lay-event="del">删除</a>
     </div>
 </script>
-<script type="text/html" id="barDemo2">
-    <div>
-        <a class="layui-btn layui-btn-primary layui-btn-xs select" lay-event="deatil2">查看</a>
-        <a class="layui-btn layui-btn-danger layui-btn-xs del" lay-event="del2">删除</a>
-    </div>
-</script>
-<script type="text/html" id="barDemo3">
-    <div>
-        <a class="layui-btn layui-btn-xs flag" lay-event="flag">修改标记</a>
-    </div>
-</script>
-<script type="text/html" id="barDemo4">
-    <div>
-        <a class="layui-btn layui-btn-primary layui-btn-xs select" lay-event="detail">查看</a>
-        <a class="layui-btn layui-btn-xs edit" lay-event="fabu">发布</a>
-        <a class="layui-btn layui-btn-danger layui-btn-xs del" lay-event="del">删除</a>
-    </div>
-</script>
+<!--<script type="text/html" id="barDemo3">-->
+<!--<div>-->
+<!--<a class="layui-btn layui-btn-xs flag" lay-event="flag">修改标记</a>-->
+<!--</div>-->
+<!--</script>-->
+<!--<script type="text/html" id="barDemo4">-->
+<!--<div>-->
+<!--<a class="layui-btn layui-btn-primary layui-btn-xs select" lay-event="detail">查看</a>-->
+<!--<a class="layui-btn layui-btn-xs edit" lay-event="fabu">发布</a>-->
+<!--<a class="layui-btn layui-btn-danger layui-btn-xs del" lay-event="del">删除</a>-->
+<!--</div>-->
+<!--</script>-->
 <script type="text/javascript">
     //JavaScript代码区域
     var $ = layui.jquery;
     var element = layui.element;
     var table = layui.table;
     $(".allPorjects").click(function () {
-        $(".content").empty().append($('<table id="demo" lay-filter="allPorjects"></table>'));
+        $(".content").empty().append($('<table id="demo" lay-filter="test2"></table>'));
         table.render({
             elem: '#demo'
             , height: 550
             , method: 'post'
             , url: '/admin/select_all_project.do'//数据接口
             , page: true //开启分页
-            , parseData:function (res) {//res为后台给前台的最初的数据
-                return{
-                    "code":res.status,//解析接口状态
-                    "data":res.data.list,//解析数据列表
-                    "count":res.total,//解析数据长度
-                    "msg":res.message//系欸小提示文本
-                }
-            }
-            ,response: {
-                statusCode: 200 //规定成功的状态码，默认：0
-            }
+//            , response: {
+//                statusCode: 200 //规定成功的状态码，默认：0
+//            }
             , cols: [[ //表头
                 {field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left'}
-                , {field: 'pNumber', title: '项目编号', width: 100, sort: true}
+                , {field: 'pNumber', title: '项目人数', width: 100, sort: true}
                 , {field: 'pName', title: '项目名称', width: 90}
                 , {field: 'pGroup', title: '项目小组成员', width: 120}
                 , {field: 'pGroupleader', title: '项目小组组长', width: 120}
@@ -133,6 +125,7 @@
                 , {field: 'pInsitute', title: '项目学院', width: '90'}
                 , {field: 'pProfiles', title: '项目信息', width: '90'}
                 , {field: 'pRemarks', title: '项目标注(可否申报)', width: '160'}
+                , {field: '', title: '操作', width: 100, toolbar: '#barDemo', align: 'center'}
             ]]
         });
     })
@@ -142,7 +135,7 @@
             elem: '#demo2'
             , height: 550
             , method: 'post'
-            , url: '/getArticle2'//数据接口
+            , url: '/admin/get_project_by_status.do?status=' + "招人中"//数据接口
             , page: true //开启分页
             , cols: [[ //表头flag0
                 {field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left'}
@@ -166,7 +159,8 @@
         table.render({
             elem: '#demo'
             , height: 550
-            , url: '/getArticle3'//数据接口
+            , method: 'post'
+            , url: '/admin/get_project_by_status.do?status=' + "人满"//数据接口
             , page: true //开启分页
             , cols: [[ //表头
                 {field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left'}
@@ -188,11 +182,36 @@
 
     $(".studentSelfInfo").click(function () {
         $(".content").empty().append($('<table id="demo" lay-filter="test3"></table>'));
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-demo',
+            title: '学生信息',
+            shadeClose: true,
+            anim: 2,
+            shade: false,
+            area: ['300px', '400px'],
+            content:
+            '<form id="editFrame" class="layui-form bianji" method="post" onsubmit="return window.parent.window.studentSubmit()">\n' +
+            '<div class="layui-form-item">\n' +
+            '            <label class="layui-form-label">学生学号</label>\n' +
+            '            <div class="layui-input-block">\n' +
+            '                <input type="text" id="studentNumber" name="studentNumber" required lay-verify="required" autocomplete="off" class="layui-input studentNumber">\n' +
+            '            </div>\n' +
+            '        </div>\n' +
+            ' <button type="submit" class="layui-btn btn" lay-submit lay-filter="formDemo" id="submit">立即提交</button>\n ' +
+            ' <button type="reset" class="layui-btn layui-btn-primary">重置</button>\n ' +
+            ' </form>\n'
+        })
+
+    })
+
+    function studentSubmit() {
+//        alert('ohyeah')
         table.render({
             elem: '#demo'
             , height: 550
-            , url: '/students/get_students_info.do'//数据接口
             , method: 'post'
+            , url: '/admin/get_student.do?studentNumber=' + $("input[name='studentNumber']").val()//数据接口
             , page: true //开启分页
             , cols: [[ //表头
                 {field: 'id', title: 'ID', width: 70, sort: true, fixed: 'left'}
@@ -200,14 +219,15 @@
                 , {field: 'sNumber', title: '学生学号', width: 120, sort: true}
                 , {field: 'sSex', title: '性别', width: 300}
                 , {field: 'sInsitute', title: '学院', width: 100}
-                , {field: 'sMajor', title: '专业', width: 100, align: 'center', toolbar: '#barDemo2'}
+                , {field: 'sMajor', title: '专业', width: 100}
                 , {field: 'sClass', title: '班级', width: 100}
                 , {field: 'sTelephone', title: '电话', width: 100}
                 , {field: 'sRemarks', title: '备注', width: 100}
-
+                , {field: '', title: '操作', width: 100, align: 'center', toolbar: '#barDemo'}
             ]]
         });
-    })
+        return false;
+    }
 
     $(".studentProjects").click(function () {
         $(".content").empty().append($('<table id="demo" lay-filter="test"></table>'));
@@ -227,13 +247,37 @@
     })
 
 
-    $(".teacherSelfInfo").click(function () {
+    $(".TeacherInfos").click(function () {
         $(".content").empty().append($('<table id="demo" lay-filter="test"></table>'));
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-demo',
+            title: '教师信息',
+            shadeClose: true,
+            anim: 2,
+            shade: false,
+            area: ['300px', '400px'],
+            content:
+            '<form id="editFrame" class="layui-form bianji" method="post" onsubmit="return window.parent.window.teacherSubmit()">\n' +
+            '<div class="layui-form-item">\n' +
+            '            <label class="layui-form-label">教师教职工号</label>\n' +
+            '            <div class="layui-input-block">\n' +
+            '                <input type="text" id="teacherNumber" name="teacherNumber" required lay-verify="required" autocomplete="off" class="layui-input teacherNumber">\n' +
+            '            </div>\n' +
+            '        </div>\n' +
+            ' <button type="submit" class="layui-btn btn" lay-submit lay-filter="formDemo" id="submit">立即提交</button>\n ' +
+            ' <button type="reset" class="layui-btn layui-btn-primary">重置</button>\n ' +
+            ' </form>\n'
+        })
+
+    })
+
+    function teacherSubmit() {
         table.render({
             elem: '#demo'
             , height: 550
-            , methon: 'post'
-            , url: '/get_teachers_info.do'//数据接口
+            , method: 'post'
+            , url: '/admin/get_teacher.do?teacherNumber=' + $("input[name='teacherNumber']").val()//数据接口
             , page: true //开启分页
             , cols: [[ //表头
                 {field: 'id', title: 'ID', width: 70, sort: true, fixed: 'left'}
@@ -241,30 +285,104 @@
                 , {field: 'tNumber', title: '教职工号', width: 120, sort: true}
                 , {field: 'tSex', title: '性别', width: 300}
                 , {field: 'tInsitute', title: '学院', width: 100}
-                , {field: 'tMajor', title: '专业', width: 100, align: 'center', toolbar: '#barDemo2'}
-                , {field: 'tClass', title: '班级', width: 100}
+                , {field: 'tMajor', title: '专业', width: 100, align: 'center'}
+//                , {field: 'tClass', title: '班级', width: 100}
                 , {field: 'tTelephone', title: '电话', width: 100}
                 , {field: 'tRemarks', title: '备注', width: 100}
-
+                , {filed: '', title: '功能', width: 100, toolbar: '#barDemo', align: 'center'}
             ]]
         });
-    })
+        return false;
+    }
 
-    $(".teacherProjects").click(function () {
+    $(".addTeacher").click(function () {
         $(".content").empty().append($('<table id="demo" lay-filter="test"></table>'));
-        table.render({
-            elem: '#demo'
-            , height: 550
-            , method: 'post'
-            , url: '/getFabu'//数据接口
-            , page: true //开启分页
-            , cols: [[ //表头
-                {field: 'id', title: 'ID', width: 70, sort: true, fixed: 'left'}
-                , {field: 'pNumber', title: '项目编号', width: 120, sort: true}
-                , {field: 'pName', title: '项目名称', width: 300}
-            ]]
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-demo',
+            title: '教师信息',
+            shadeClose: true,
+            anim: 2,
+            shade: false,
+            //maxmin: true, //开启最大化最小化按钮
+            area: ['300px', '500px'],
+            content:
+            '<form id="editFrame" class="layui-form bianji" method="post"  action="admin/add_teacher.do">\n' +
+            '        <div class="layui-form-item">\n' +
+            '            <label class="layui-form-label">教师教职工号</label>\n' +
+            '            <div class="layui-input-block">\n' +
+            '                <input type="text" name="tNumber" required lay-verify="required" autocomplete="off" class="layui-input">\n' +
+            '            </div>\n' +
+            '        </div>\n' +
+            '        <div class="layui-form-item">\n' +
+            '            <label class="layui-form-label">教师姓名</label>\n' +
+            '            <div class="layui-input-block">\n' +
+            '                <input type="text" name="tName"  required lay-verify="required"  autocomplete="off" class="layui-input">\n' +
+            '            </div>\n' +
+            '        </div>\n' +
+            '        <div class="layui-form-item">\n' +
+            '            <label class="layui-form-label">性别</label>\n' +
+            '            <div class="layui-input-block">\n' +
+            '                <input type="text" name="tSex" required  lay-verify="required"  autocomplete="off" class="layui-input tSex" >\n' +
+            '            </div>\n' +
+            '        </div>\n' +
+            '        <div class="layui-form-item">\n' +
+            '            <label class="layui-form-label">所在学院</label>\n' +
+            '            <div class="layui-input-block">\n' +
+            '                <input type="text" name="tInstitute" required  lay-verify="required" autocomplete="off" class="layui-input">\n' +
+            '            </div>\n' +
+            '        </div>\n' +
+            '        <div class="layui-form-item">\n' +
+            '            <label class="layui-form-label">专业</label>\n' +
+            '            <div class="layui-input-block">\n' +
+            '                <input type="text" name="tMajor" required  lay-verify="required" placeholder="按‘，’划分" autocomplete="off" class="layui-input">\n' +
+            '            </div>\n' +
+            '        </div>\n' +
+            '        <div class="layui-form-item">\n' +
+            '            <label class="layui-form-label">职业</label>\n' +
+            '            <div class="layui-input-block">\n' +
+            '                <input type="text" name="tProfessionaltitle" required  lay-verify="required"  autocomplete="off" class="layui-input">\n' +
+            '            </div>\n' +
+            '        </div>\n' +
+            '        <div class="layui-form-item">\n' +
+            '            <label class="layui-form-label">电话</label>\n' +
+            '            <div class="layui-input-block">\n' +
+            '                <input type="text" name="tTelephone" required lay-verify="required" autocomplete="off" class="layui-input">\n' +
+            '            </div>\n' +
+            '        </div>\n' +
+            '        <div class="layui-form-item">\n' +
+            '            <label class="layui-form-label">密码</label>\n' +
+            '            <div class="layui-input-block">\n' +
+            '                <input type="password" name="tPassword" required lay-verify="required" autocomplete="off" class="layui-input">\n' +
+            '            </div>\n' +
+            '        </div>\n' +
+            '        <div class="layui-form-item">\n' +
+            '            <label class="layui-form-label">密保问题</label>\n' +
+            '            <div class="layui-input-block">\n' +
+            '                <input type="text" name="tQuestion" required lay-verify="required" autocomplete="off" class="layui-input">\n' +
+            '            </div>\n' +
+            '        </div>\n' +
+            '        <div class="layui-form-item">\n' +
+            '            <label class="layui-form-label">问题答案</label>\n' +
+            '            <div class="layui-input-block">\n' +
+            '                <input type="text" name="tAnswer" required lay-verify="required" autocomplete="off" class="layui-input">\n' +
+            '            </div>\n' +
+            '        </div>\n' +
+            '        <div class="layui-form-item">\n' +
+            '            <label class="layui-form-label">角色</label>\n' +
+            '            <div class="layui-input-block">\n' +
+            '                <input type="text" name="tRule" required lay-verify="required" autocomplete="off" class="layui-input">\n' +
+            '            </div>\n' +
+            '        </div>\n' +
+            '      <div class="layui-form-item">\n ' +
+            '         <div class="layui-input-block">\n ' +
+            ' <button class="layui-btn btn" lay-submit lay-filter="formDemo">立即提交</button>\n ' +
+            ' <button type="reset" class="layui-btn layui-btn-primary">重置</button>\n ' +
+            ' </div>\n ' +
+            ' </div>\n ' +
+            ' </form>\n'
         });
-    })
+    });
     $(".toPublish").click(function () {
         $(".content").empty().append($('<table id="demo" lay-filter="test"></table>'));
         layer.open({
@@ -277,7 +395,7 @@
             //maxmin: true, //开启最大化最小化按钮
             area: ['300px', '500px'],
             content:
-            '<form id="editFrame" class="layui-form bianji" action="teachers/add_project.do">\n' +
+            '<form id="editFrame" class="layui-form bianji" method="post" action="teachers/add_project.do">\n' +
             '        <div class="layui-form-item">\n' +
             '            <label class="layui-form-label">项目名称</label>\n' +
             '            <div class="layui-input-block">\n' +
@@ -322,6 +440,99 @@
             ' </div>\n ' +
             ' </form>\n'
         });
+    });
+    table.on('tool(test3)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+        var parsedata = obj.data //获得当前行数据
+            , layEvent = obj.event; //获得 lay-event 对应的值
+        if (layEvent === 'detail') {
+            layer.msg('查看操作');
+        } else if (layEvent === 'del') {
+            layer.confirm('真的删除行么', function (index) {
+                //向服务端发送删除指令
+//                console.log(parsedata.tNumber)
+                $.ajax({
+                    type: 'post',
+                    url: '/admin/delete_student.do',
+                    data: {studentNumber: parsedata.sNumber},
+                    dataType: 'json',
+                }).done(function (data) {
+                    var html = '';
+                    if (data.status == 0) {
+                        alert('删除成功');
+                        obj.del(); //删除对应行（tr）的DOM结构
+                        layer.close(index);
+                        window.location.reload();
+                    } else {
+                        alert('删除失败，请稍后重试');
+                        return false;
+                    }
+                })
+            })
+        } else if (layEvent === 'edit') {
+            layer.msg('功能暂时未开通');
+        }
+    });
+    table.on('tool(test2)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+        var parsedata = obj.data //获得当前行数据
+            , layEvent = obj.event; //获得 lay-event 对应的值
+        if (layEvent === 'detail') {
+            layer.msg('查看操作');
+        } else if (layEvent === 'del') {
+            layer.confirm('真的删除行么', function (index) {
+                //向服务端发送删除指令
+//                console.log(parsedata.tNumber)
+                $.ajax({
+                    type: 'post',
+                    url: '/admin/delete_project.do',
+                    data: {projectsId: parsedata.id},
+                    dataType: 'json',
+                }).done(function (data) {
+                    var html = '';
+                    if (data.status == 0) {
+                        alert('删除成功');
+                        obj.del(); //删除对应行（tr）的DOM结构
+                        layer.close(index);
+                        window.location.reload();
+                    } else {
+                        alert('删除失败，请稍后重试');
+                        return false;
+                    }
+                })
+            })
+        } else if (layEvent === 'edit') {
+            layer.msg('功能暂时未开通');
+        }
+    });
+    table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+        var parsedata = obj.data //获得当前行数据
+            , layEvent = obj.event; //获得 lay-event 对应的值
+        if (layEvent === 'detail') {
+            layer.msg('查看操作');
+        } else if (layEvent === 'del') {
+            layer.confirm('真的删除行么', function (index) {
+                //向服务端发送删除指令
+//                console.log(parsedata.tNumber)
+                $.ajax({
+                    type: 'post',
+                    url: '/admin/delete_teacher.do',
+                    data: {teacherNumber: parsedata.tNumber},
+                    dataType: 'json',
+                }).done(function (data) {
+                    var html = '';
+                    if (data.status == 0) {
+                        alert('删除成功');
+                        obj.del(); //删除对应行（tr）的DOM结构
+                        layer.close(index);
+                        window.location.reload();
+                    } else {
+                        alert('删除失败，请稍后重试');
+                        return false;
+                    }
+                })
+            })
+        } else if (layEvent === 'edit') {
+            layer.msg('功能暂时未开通');
+        }
     });
 </script>
 </body>

@@ -3,6 +3,8 @@ package com.project.dao;
 import com.project.pojo.Students;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface StudentsMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -35,4 +37,6 @@ public interface StudentsMapper {
     int deleteByNumber(String number);
 
     Students selectByNumber(String number);
+
+    List<Students> selectAllStudents();
 }

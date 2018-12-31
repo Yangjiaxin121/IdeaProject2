@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8">
+
+	<title></title>
+
+	<!-- Behavioral Meta Data -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <style type="text/css">
+           *{margin:0; padding:0;}
+           body,input{font-size:14px; line-height:24px; color:#333; font-family:Microsoft yahei, Song, Arial, Helvetica, Tahoma, Geneva;}
+           h1{margin-bottom:15px; height:100px; line-height:100px; text-align:center; font-size:24px; color:#fff; background:black;}
+          #content #post,#comment p{zoom:1;}
+          #content #post:after,#comment p:after{display:block; height:0; clear:both; visibility:hidden; overflow:hidden; content:'.';}
+          .transition{-webkit-transition:all 0.5s linear; -moz-transition:all 0.5s linear; -o-transition:all 0.5s linear; -ms-transition:all 0.5s linear; transition:all 0.5s linear;}
+          #content{margin:0 auto; width:960px; overflow:hidden;}
+          #content #post{margin-bottom:15px; padding-bottom:15px; border-bottom:1px #d4d4d4 dashed;
+                   height: 556px;
+               }
+          #content #post textarea{display:block; margin-bottom:10px; padding:5px; width:948px; height:390px; border:1px #d1d1d1 solid; border-radius:5px; resize:none; outline:none;}
+          #content #post textarea:hover{border:1px #9bdf70 solid; background:#f0fbeb;}
+          #content #post #postBt,#content #post #clearBt{margin-left:5px; padding:3px; float:right;}
+          #comment{overflow:hidden;}
+          #comment p{margin-bottom:10px; padding:10px; border-radius:5px;}
+         #comment p:nth-child(odd){border:1px solid #e3e197; background:#ffd;}
+          #comment p:nth-child(even){border:1px solid #adcd3c; background:#f2fddb;}
+          /*#comment p span{display:inline; float:left;}*/
+          #comment p .right{text-align:right;}
+          #comment p .msg{width:738px;}
+          #comment p .datetime{width:200px; color:#999; text-align:right;}
+        #page001{
+            width:70%;
+            float: left;
+            background: white;
+        }
+        #page002{
+            width: 30%;
+            float: left;
+        }
+        .part003{
+            width: 100%;
+            float: left;
+        }
+        body{
+          background: #FFFAFA;
+        }
+    </style>
+     <script src="https://cdn.bootcss.com/jquery/1.8.3/jquery.min.js"></script>
+         <script type="text/javascript">
+             var named;
+             function delete1(id)
+             {
+                 localStorage.removeItem(id);
+                 this.Storage.writeData();
+             }
+             function prom() {
+
+                 var name = prompt("请输入您的名字", "");//将输入的内容赋给变量 name ，
+                 named = name;
+                 //这里需要注意的是，prompt有两个参数，前面是提示的话，后面是当对话框出来后，在对话框里的默认值
+
+                 if (named)//如果返回的有内容
+
+                 {
+
+                     alert("欢迎您：" + name)
+                     document.getElementById("mm1").style.display = "none";
+                     document.getElementById("mm2").value = named;
+
+                 }
+                 else {
+                     document.getElementById("mm2").value = "匿名发言者";
+                 }
+
+             }
+          var Storage =
+          {
+              saveData:function()//保存数据
+              {
+    
+                      var data = document.querySelector("#post textarea");
+                  if(data.value != "")
+                  {
+                      var time = new Date().getTime() + Math.random() * 5;//getTime是Date对象中的方法，作用是返回 1970年01月01日至今的毫秒数
+                      if (named) {
+                          localStorage.setItem(time, data.value + "|" + named + "|" + this.getDateTime());//将毫秒数存入Key值中，可以降低Key值重复率
+                      }
+                      else
+                      {
+                          localStorage.setItem(time, data.value + "|" + "匿名发言者" + "|" + this.getDateTime());//将毫秒数存入Key值中，可以降低Key值重复率
+                      }
+
+                      data.value = "";
+                      this.writeData();
+                  }
+                  else
+                  {
+                      alert("请填写您的留言！");
+                 }
+              },
+              writeData:function()//输出数据
+              {
+                 var dataHtml = "", data = "";
+                  for(var i = localStorage.length-1; i >= 0; i--)//效率更高的循环方法
+                  {
+                      data = localStorage.getItem(localStorage.key(i)).split("|");
+ 
+                          //dataHtml += "<p><span class=\"msg\">" + data[0] + "</span><span class=\"datetime\">" + data[1] + "</span><span>" + data[2]+"</span></p>";
+                      dataHtml += "<span style=>" + data[1] + "<span style=\"float:right\">" + data[2] + "</span><p><span class=\"msg\">" + data[0] + "<input style=\"float:right;border:none;border-radius:5px;\" id=\"clearBt\" type=\"button\" onclick=\"delete1(" + localStorage.key(i) + ");\" value=\"删除\"/>" + "</span></p>";
+                  }
+                  document.getElementById("comment").innerHTML = dataHtml;
+              },
+              clearData:function()//清空数据
+              {
+                  if(localStorage.length > 0)
+                  {
+                      if(window.confirm("清空后不可恢复，是否确认清空？"))
+                      {
+                          localStorage.clear();
+                          this.writeData();
+                      }
+                  }
+                  else
+                 {
+                     alert("没有需要清空的数据！");
+                  }
+              },
+              getDateTime:function()//获取日期时间，例如 2012-03-08 12:58:58
+              {
+                  var isZero = function(num)//私有方法，自动补零
+                  {
+                      if(num < 10)
+                     {
+                          num = "0" + num;
+                      }
+                      return num;
+                  }
+                  
+                  var d = new Date();
+                  return d.getFullYear() + "-" + isZero(d.getMonth() + 1) + "-" + isZero(d.getDate()) + " " + isZero(d.getHours()) + ":" + isZero(d.getMinutes()) + ":" + isZero(d.getSeconds());
+              }            
+          }
+          
+          window.onload = function()
+          {
+              Storage.writeData();//当打开页面的时候，先将localStorage中的数据输出一边，如果没有数据，则输出空
+              document.getElementById("postBt").onclick = function(){Storage.saveData();}//发表评论按钮添加点击事件，作用是将localStorage中的数据输出
+              document.getElementById("clearBt").onclick = function(){Storage.clearData();}//清空所有已保存的数据
+          }
+          $.ajax({
+            type     :'post',
+            url      : "",
+            dataType : "json",
+            date     : {mm1:$("#mm1").val(),mm2:$("#mm2").val()},
+            success:function(res){
+              if(0 === res.status){
+          typeof param.success === 'function' && param.success(res.data,res.msg);
+        }
+            }
+          });
+      </script>
+    
+</head>
+<body>
+<a href="spore-post9.html">Back</a>
+<section style="background: white">
+<div id="page001" >
+                      <pre>
+                  抑郁者眼中的世界是一个什么样的世界？
+                  “目光所及皆惊恐，心中所想皆卑痛”
+                  目光所及皆惊恐，心中所想皆卑痛！
+
+                  抑郁者眼中的世界是一个什么样的世界？
+                  是一个“目光所及皆惊恐”的世界。
+                  我惊恐于站立在人群之中，我总是惶恐不安。
+                  我惊恐于说错话得罪人身边周围的任何一个人。
+                  在我看来有人的地方，就会有麻烦。就会给我制造内心的痛苦。
+                  我惊恐于路人一个不屑的眼神，在大脑中久久不能挥之而去。反复想来想去折磨我那早已不堪重负的大脑。
+
+                  我极度敏感，任何一个风吹草动都会勾起我深深的哀思。
+
+                  我就像站在一个遍布敌人的世界里，周围的一切都能让我勾起回忆，直达痛苦的深渊。
+                  看到一块手机，我就回忆起曾经丢手机的着急经历。
+                  看到路边来了一辆车，我就立马想到它万一撞到我怎么办。
+                  看到路边一颗树，我就会想到吊死鬼。
+                  看到一条狗，我就想到狂犬病。
+                  看到红绿灯，我就会想到这里曾经出过车祸。
+                  我无论看到什么，都会顺着这个事物联想，看到它的反面，让自己陷入深深的痛苦之中。
+                  我天天活在惊恐之中。我寸步难行。
+                  我惊恐周围的一切，仿佛世间万物都是我的敌人，带给我无穷的痛苦和伤害。
+
+                  抑郁眼中的世界是一个目光所及皆惊恐的世界。我在惊恐中煎熬着，苦苦的支撑着每一分每一秒。
+                  <img src="<%=require("../image/gallery-image1.jpg")%>" class="grow" width="70%" height="50%">
+
+                  抑郁眼中的世界是一个“心中所想皆卑痛”的世界。
+                  深度的自卑感让我逃避人群，躲在一个角落愈合伤口。
+                  深度的自责，一次次把我的情绪逼到崩溃状态。
+
+                  大脑的思维跳跃犹如脱缰的群马在相互碰撞，又犹如洪水泛滥一发不可收拾。任由它如狂风骤雨般肆虐。
+                  我根本无法控制它无休止的跳跃。
+                  思维失控让我的大脑超负荷持续运转。
+                  从朝日的清晨到落日的黄昏。
+                  从渐暗的傍晚到肃静的深夜。
+                  “思维跳跃”无一时一刻休止。
+
+                  醒着的时候像睡着，睡着的时候像醒着。
+                  梦的真实犹如身临其境。
+                  噩梦的惊恐让我一次次陡然惊醒，摸摸被褥却已湿透。虚汗犹如淋雨一般。
+
+                  我在噩梦中身体紧绷的像一块铁板，不敢有一丝一毫之微动。我在万分惊恐之中。
+                  我很困，但我却无法入睡。
+                  我很累，但我却无一刻之安宁。
+                  哪怕静下心让我坐着不动十分钟，都是一种奢侈。我总是坐立不安。
+
+                  思维极度活跃无一刻之休止。
+                  身体却极度劳累疲惫不堪。
+                  大脑思维和身体出现巨大的错位。
+                  这种巨大的矛盾就是“思想上的路人，行动上的矮子”。
+
+                  有时思维活跃，创意无穷。联想无止境。拥有超凡的洞察力和精准性。
+                  有时情绪低落，练睁眼都觉得没有力气。生无可恋，死亦无憾。看不到希望，看不到未来。
+
+                  我在亢奋与低落中轮回。
+                  我在自负与自卑中转换。
+                  我亦在地狱与天堂间穿梭。
+                  我也在激情澎湃与痛苦煎熬中循环往复。
+
+                  抑郁愈者眼中的世界是一个万事万物皆喜的世界！
+                  过去的我犹如被封在一个不见天日的城堡里。
+                  过去的我犹如生活在一个布满荆棘的牢笼里。
+                  过去的我就一副行尸走肉行走在这天地之间。
+                  我渐渐醒悟了，
+                  我渐渐明白了，
+                  我渐渐看清了，
+                  我不再迷茫。
+                  我不再徘徊。
+                  我不再为万事万物之所动。
+
+                  万事万物皆有两面，我只要一面即可。
+                  我只要顺着我方向的那一面即可。
+
+                  我只要一面，我就可以做到遇万事万物皆欣喜。
+
+                  万物同构即万物一体。
+                  即故行一法皆可解决天下事。
+                  至此天下两分，我与万物。
+
+
+                  到这时，我也看懂了那些古代先贤留下来的经典。
+                  道家之无为。
+                  佛家之无欲。
+                  儒家之无我。
+                  儒释道兵分三路最后在山顶重合。
+
+                      </pre>
+</div>
+<div id="page002">
+</div>
+</section>
+<div class="part003">
+    <div id="content">
+              <div id="post">
+                  <div style="background:#3EADC5 ;height:30px;">
+                      Name：<input type="submit" id="mm1" name="Submit3" style="border:none; background-color:#3EADC5; color:white;" value="默认用户点击改变" onclick="prom()" />
+                      <input type="text" id="mm2" style="border:none; background-color:#3EADC5; color:white;"   onclick="prom()"/>
+                      <!--disabled="disabled"-->
+                  </div>
+                  <div>
+                  <textarea class="transition"></textarea>
+                      </div>
+                  <input id="postBt" type="button" style="border:none; background-color:#3EADC5; color:white;border-radius:5px; width:80px; height:30px;" value="发表评论"/>
+                 <input id="clearBt" type="button" style="border:none; background-color:#3EADC5; color:white;border-radius:5px; width:80px; height:30px;" value="清空"/>
+             </div>
+             <div id="comment"></div>
+              </div>
+
+
+	
+   
+
+<div id="A7">
+
+    <div id="wrapper-A7">
+    <div id="line-A7"></div>
+    <div id="copyright"><strong>Life will be better<a href="http://www.baidu.com/" target="_blank" title="AIMER">AIMER</a> - Collect from <a href="" title="depress" target="_blank">帮助抑郁症</a></strong></div>
+    </div>
+</div>
+</div>
+
+
+</body>
+</html>

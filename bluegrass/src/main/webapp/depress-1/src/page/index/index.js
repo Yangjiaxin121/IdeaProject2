@@ -1,0 +1,14 @@
+'use strict';
+var _mm=require('../../util/mm.js');
+console.log(_mm.getUrlParam('test'));
+require('./index.css');
+require('../../view/JS/fastclick.js');
+require('../../view/JS/jquery-1.8.3.min.js');
+require('../../view/JS/jquery-animate-css-rotate-scale.js');
+require('../../view/JS/jquery.localScroll.min.js');
+require('../../view/JS/jquery.scrollTo.min.js');	
+require('../../view/JS/wow.min.js');
+require('../shouye/login.css');
+require('../shouye/shouye.js');
+require('../result/index.js');
+require('../user-login/index.js');

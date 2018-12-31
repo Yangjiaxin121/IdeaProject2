@@ -3,6 +3,7 @@ package com.project.controller.backend;
 
 import com.github.pagehelper.PageInfo;
 import com.project.common.Const;
+import com.project.common.ResponseCode;
 import com.project.common.ServerResponse;
 import com.project.pojo.Administrator;
 import com.project.pojo.Projects;
@@ -120,9 +121,9 @@ public class AdminController {
         if (!(object instanceof Administrator)){
             return ServerResponse.createByErrorMessage("无权限");
         }
-        return iAdminService.getTeacher(teacherNumber);
-    }
 
+        return  iAdminService.getTeacher(teacherNumber);
+    }
     @RequestMapping(value = "add_teacher.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse addTeacher(HttpSession session, Teachers teachers){
@@ -151,6 +152,26 @@ public class AdminController {
     public ServerResponse getProjectByStatus(String status){
 
         return iAdminService.getProjectByStatus(status);
+    }
+
+    @RequestMapping(value = "get_all_teachers.do", method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse getAllTeachers(HttpSession session){
+        Object object = session.getAttribute(Const.CURRENT_USER);
+        if (!(object instanceof Administrator)){
+            return ServerResponse.createByErrorMessage("无权限");
+        }
+        return iAdminService.getAllTeachers();
+    }
+
+    @RequestMapping(value = "get_all_students.do", method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse getAllStudents(HttpSession session){
+        Object object = session.getAttribute(Const.CURRENT_USER);
+        if (!(object instanceof Administrator)){
+            return ServerResponse.createByErrorMessage("无权限");
+        }
+        return iAdminService.getAllStudents();
     }
 
 }

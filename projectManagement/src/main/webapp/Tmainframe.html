@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>项目申报平台</title>
     <link rel="stylesheet" href="./layui/css/layui.css">
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
-    <script type="text/javascript"
-            src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM.js"></script>
-    <script type="text/javascript"
-            src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+    <!--<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>-->
+    <!--<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>-->
+    <!--<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>-->
+    <!--<script type="text/javascript"-->
+            <!--src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>-->
+    <!--<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>-->
+    <!--<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>-->
+    <!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM.js"></script>-->
+    <!--<script type="text/javascript"-->
+            <!--src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>-->
+    <!--<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>-->
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -106,21 +106,22 @@
         table.render({
             elem: '#demo'
             , height: 550
-            , url: '/getArticle1'//数据接口
+            , method: 'post'
+            , url: '/admin/select_all_project.do'//数据接口
             , page: true //开启分页
             , cols: [[ //表头
                 {field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left'}
-                , {field: 'p_number', title: '项目编号', width: 100, sort: true}
-                , {field: 'p_name', title: '项目名称', width: 90}
-                , {field: 'p_group', title: '项目小组成员', width: 120}
-                , {field: 'p_groupLeader', title: '项目小组组长', width: 120}
-                , {field: 'p_tutor', title: '项目导师', width: 90}
-                , {field: 'p_firstTutor', title: '项目首席导师', width: 135}
-                , {field: 'p_declareDate', title: '项目创建时间', width: 120}
-                , {field: 'p_updateDate', title: '项目修改时间', width: 120}
-                , {field: 'p_insitute', title: '项目学院', width: '90'}
-                , {field: 'p_profiles', title: '项目信息', width: '90'}
-                , {field: 'p_remarks', title: '项目标注(可否申报)', width: '160'}
+                , {field: 'pNumber', title: '项目编号', width: 100, sort: true}
+                , {field: 'pName', title: '项目名称', width: 90}
+                , {field: 'pGroup', title: '项目小组成员', width: 120}
+                , {field: 'pGroupLeader', title: '项目小组组长', width: 120}
+                , {field: 'pTutor', title: '项目导师', width: 90}
+                , {field: 'pFirstTutor', title: '项目首席导师', width: 135}
+                , {field: 'pDeclareDate', title: '项目创建时间', width: 120}
+                , {field: 'pUpdateDate', title: '项目修改时间', width: 120}
+                , {field: 'pInsitute', title: '项目学院', width: '90'}
+                , {field: 'pProfiles', title: '项目信息', width: '90'}
+                , {field: 'pRemarks', title: '项目标注(可否申报)', width: '160'}
 //                , {fixed: 'right', width: 300, align: 'center', toolbar: '#barDemo'}
             ]]
         });
@@ -132,21 +133,22 @@
         table.render({
             elem: '#demo2'
             , height: 550
-            , url: '/getArticle2'//数据接口
+            , method: 'post'
+            , url: '/admin/get_project_by_status.do?status=' + "招人中"//数据接口
             , page: true //开启分页
             , cols: [[ //表头flag0
                 {field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left'}
-                , {field: 'p_number', title: '项目编号', width: 100, sort: true}
-                , {field: 'p_name', title: '项目名称', width: 90}
-                , {field: 'p_group', title: '项目小组成员', width: 120}
-                , {field: 'p_groupLeader', title: '项目小组组长', width: 120}
-                , {field: 'p_tutor', title: '项目导师', width: 90}
-                , {field: 'p_firstTutor', title: '项目首席导师', width: 135}
-                , {field: 'p_declareDate', title: '项目创建时间', width: 120}
-                , {field: 'p_updateDate', title: '项目修改时间', width: 120}
-                , {field: 'p_insitute', title: '项目学院', width: '90'}
-                , {field: 'p_profiles', title: '项目信息', width: '90'}
-                , {field: 'p_remarks', title: '项目标注(可否申报)', width: '160'}
+                , {field: 'pNumber', title: '项目编号', width: 100, sort: true}
+                , {field: 'pName', title: '项目名称', width: 90}
+                , {field: 'pGroup', title: '项目小组成员', width: 120}
+                , {field: 'pGroupLeader', title: '项目小组组长', width: 120}
+                , {field: 'pYutor', title: '项目导师', width: 90}
+                , {field: 'pFirstTutor', title: '项目首席导师', width: 135}
+                , {field: 'pDeclareDate', title: '项目创建时间', width: 120}
+                , {field: 'pUpdateDate', title: '项目修改时间', width: 120}
+                , {field: 'pInsitute', title: '项目学院', width: '90'}
+                , {field: 'pProfiles', title: '项目信息', width: '90'}
+                , {field: 'pRemarks', title: '项目标注(可否申报)', width: '160'}
             ]]
         });
     })
@@ -156,21 +158,22 @@
         table.render({
             elem: '#demo'
             , height: 550
-            , url: '/getArticle3'//数据接口
+            , method: 'post'
+            , url: '/admin/get_project_by_status.do?status=' + "人满"//数据接口
             , page: true //开启分页
             , cols: [[ //表头
                 {field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left'}
-                , {field: 'p_number', title: '项目编号', width: 100, sort: true}
-                , {field: 'p_name', title: '项目名称', width: 90}
-                , {field: 'p_group', title: '项目小组成员', width: 120}
-                , {field: 'p_groupLeader', title: '项目小组组长', width: 120}
-                , {field: 'p_tutor', title: '项目导师', width: 90}
-                , {field: 'p_firstTutor', title: '项目首席导师', width: 135}
-                , {field: 'p_declareDate', title: '项目创建时间', width: 120}
-                , {field: 'p_updateDate', title: '项目修改时间', width: 120}
-                , {field: 'p_insitute', title: '项目学院', width: '90'}
-                , {field: 'p_profiles', title: '项目信息', width: '90'}
-                , {field: 'p_remarks', title: '项目标注(可否申报)', width: '160'}
+                , {field: 'pNumber', title: '项目编号', width: 100, sort: true}
+                , {field: 'pName', title: '项目名称', width: 90}
+                , {field: 'pGroup', title: '项目小组成员', width: 120}
+                , {field: 'pGroupLeader', title: '项目小组组长', width: 120}
+                , {field: 'pTutor', title: '项目导师', width: 90}
+                , {field: 'pFirstTutor', title: '项目首席导师', width: 135}
+                , {field: 'pDeclareDate', title: '项目创建时间', width: 120}
+                , {field: 'pUpdateDate', title: '项目修改时间', width: 120}
+                , {field: 'pInsitute', title: '项目学院', width: '90'}
+                , {field: 'pProfiles', title: '项目信息', width: '90'}
+                , {field: 'pRemarks', title: '项目标注(可否申报)', width: '160'}
             ]]
         });
     })
@@ -219,8 +222,8 @@
         table.render({
             elem: '#demo'
             , height: 550
-            , methon: 'post'
-            , url: '/get_teachers_info.do'//数据接口
+            , method: 'post'
+            , url: '/teachers/get_teachers_info.do'//数据接口
             , page: true //开启分页
             , cols: [[ //表头
                 {field: 'id', title: 'ID', width: 70, sort: true, fixed: 'left'}
@@ -264,8 +267,8 @@
             //maxmin: true, //开启最大化最小化按钮
             area: ['300px', '500px'],
             content:
-            '<form id="editFrame" class="layui-form bianji" action="teachers/add_project.do">\n' +
-            '        <div class="layui-form-item">\n' +
+            '<form id="editFrame" class="layui-form bianji" method="post" action="teachers/add_project.do">\n' +
+                '        <div class="layui-form-item">\n' +
             '            <label class="layui-form-label">项目名称</label>\n' +
             '            <div class="layui-input-block">\n' +
             '                <input type="text" name="pName" required lay-verify="required" autocomplete="off" class="layui-input">\n' +

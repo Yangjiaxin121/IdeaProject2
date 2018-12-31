@@ -71,14 +71,14 @@
 
 
 
-        <table tableName="students" domainObjectName="Students" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
-            <columnOverride column="s_remarks" jdbcType="VARCHAR" />
-            <columnOverride column="s_messageBoard" jdbcType="VARCHAR" />
-        </table>
-        <table tableName="teachers" domainObjectName="Teachers" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
-            <columnOverride column="t_remarks" jdbcType="VARCHAR" />
-        </table>
-        <table tableName="administrator" domainObjectName="Administrator" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <!--<table tableName="students" domainObjectName="Students" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">-->
+            <!--<columnOverride column="s_remarks" jdbcType="VARCHAR" />-->
+            <!--<columnOverride column="s_messageBoard" jdbcType="VARCHAR" />-->
+        <!--</table>-->
+        <!--<table tableName="teachers" domainObjectName="Teachers" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">-->
+            <!--<columnOverride column="t_remarks" jdbcType="VARCHAR" />-->
+        <!--</table>-->
+        <!--<table tableName="administrator" domainObjectName="Administrator" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
         <table tableName="projects" domainObjectName="Projects" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <columnOverride column="p_profiles" jdbcType="VARCHAR" />
             <columnOverride column="p_remarks" jdbcType="VARCHAR" />

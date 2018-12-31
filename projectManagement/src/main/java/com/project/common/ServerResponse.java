@@ -16,31 +16,30 @@ import java.io.Serializable;
 //保证序列化json的时候，如果是null的对象，key也会消失
 //@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class ServerResponse<T> implements Serializable {
-
-    private int code;
+    private int code=0;
     private int count = 1000;
     private int status;
-    private String msg;
+    private String msg="";
     private T data;
 
     private ServerResponse(int status){
         this.status = status;
-        this.code = status;
+        this.code=status==0 ?0:1;
     }
     private ServerResponse(int status,T data){
         this.status = status;
-        this.code = status;
+        this.code=status==0 ?0:1;
         this.data = data;
     }
     private ServerResponse(int status, String msg, T data){
         this.status = status;
-        this.code = status;
+        this.code=status==0 ?0:1;
         this.msg = msg;
         this.data = data;
     }
     private ServerResponse(int status, String msg){
         this.status = status;
-        this.code = status;
+        this.code=status==0 ?0:1;
         this.msg = msg;
     }
 

@@ -15,6 +15,12 @@ public class Const {
     public static final String TEL = "tel";
 
 
+    public static final String XinFaBu = "新发布";
+    public static final String ZhaoRenZhong = "招人中";
+    public static final String JinXingZhong = "进行中";
+    public static final String YiJieShu = "已结束";
+
+
 
 
     public interface Cart{

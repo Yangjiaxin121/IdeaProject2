@@ -1,167 +1,177 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.project.dao.ProjectsMapper" >
-  <resultMap id="BaseResultMap" type="com.project.pojo.Projects" >
-    <constructor >
-      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="p_number" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="p_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="p_group" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="p_groupLeader" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="p_tutor" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="p_firstTutor" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="p_declareDate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="p_updateDate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="p_insitute" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="p_profiles" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="p_remarks" jdbcType="VARCHAR" javaType="java.lang.String" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dao.ProjectsMapper">
+  <resultMap id="BaseResultMap" type="com.project.pojo.Projects">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="p_number" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="p_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="p_group" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="p_groupLeader" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="p_tutor" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="p_firstTutor" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="p_declareDate" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="p_updateDate" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="p_insitute" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="p_profiles" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="p_remarks" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="p_qq" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     id, p_number, p_name, p_group, p_groupLeader, p_tutor, p_firstTutor, p_declareDate, 
-    p_updateDate, p_insitute, p_profiles, p_remarks
+    p_updateDate, p_insitute, p_profiles, p_remarks, p_qq
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from projects
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from projects
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.project.pojo.Projects" >
+  <insert id="insert" parameterType="com.project.pojo.Projects">
     insert into projects (id, p_number, p_name, 
       p_group, p_groupLeader, p_tutor, 
       p_firstTutor, p_declareDate, p_updateDate, 
-      p_insitute, p_profiles, p_remarks
-      )
+      p_insitute, p_profiles, p_remarks, 
+      p_qq)
     values (#{id,jdbcType=INTEGER}, #{pNumber,jdbcType=VARCHAR}, #{pName,jdbcType=VARCHAR}, 
       #{pGroup,jdbcType=VARCHAR}, #{pGroupleader,jdbcType=VARCHAR}, #{pTutor,jdbcType=VARCHAR}, 
       #{pFirsttutor,jdbcType=VARCHAR}, now(), now(),
-      #{pInsitute,jdbcType=VARCHAR}, #{pProfiles,jdbcType=VARCHAR}, #{pRemarks,jdbcType=VARCHAR}
-      )
+      #{pInsitute,jdbcType=VARCHAR}, #{pProfiles,jdbcType=VARCHAR}, #{pRemarks,jdbcType=VARCHAR}, 
+      #{pQq,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.project.pojo.Projects" >
+  <insert id="insertSelective" parameterType="com.project.pojo.Projects">
     insert into projects
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="pNumber != null" >
+      <if test="pNumber != null">
         p_number,
       </if>
-      <if test="pName != null" >
+      <if test="pName != null">
         p_name,
       </if>
-      <if test="pGroup != null" >
+      <if test="pGroup != null">
         p_group,
       </if>
-      <if test="pGroupleader != null" >
+      <if test="pGroupleader != null">
         p_groupLeader,
       </if>
-      <if test="pTutor != null" >
+      <if test="pTutor != null">
         p_tutor,
       </if>
-      <if test="pFirsttutor != null" >
+      <if test="pFirsttutor != null">
         p_firstTutor,
       </if>
-      <if test="pDeclaredate != null" >
+      <if test="pDeclaredate != null">
         p_declareDate,
       </if>
-      <if test="pUpdatedate != null" >
+      <if test="pUpdatedate != null">
         p_updateDate,
       </if>
-      <if test="pInsitute != null" >
+      <if test="pInsitute != null">
         p_insitute,
       </if>
-      <if test="pProfiles != null" >
+      <if test="pProfiles != null">
         p_profiles,
       </if>
-      <if test="pRemarks != null" >
+      <if test="pRemarks != null">
         p_remarks,
       </if>
+      <if test="pQq != null">
+        p_qq,
+      </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="pNumber != null" >
+      <if test="pNumber != null">
         #{pNumber,jdbcType=VARCHAR},
       </if>
-      <if test="pName != null" >
+      <if test="pName != null">
         #{pName,jdbcType=VARCHAR},
       </if>
-      <if test="pGroup != null" >
+      <if test="pGroup != null">
         #{pGroup,jdbcType=VARCHAR},
       </if>
-      <if test="pGroupleader != null" >
+      <if test="pGroupleader != null">
         #{pGroupleader,jdbcType=VARCHAR},
       </if>
-      <if test="pTutor != null" >
+      <if test="pTutor != null">
         #{pTutor,jdbcType=VARCHAR},
       </if>
-      <if test="pFirsttutor != null" >
+      <if test="pFirsttutor != null">
         #{pFirsttutor,jdbcType=VARCHAR},
       </if>
-      <if test="pDeclaredate != null" >
+      <if test="pDeclaredate != null">
         now(),
       </if>
-      <if test="pUpdatedate != null" >
+      <if test="pUpdatedate != null">
         now(),
       </if>
-      <if test="pInsitute != null" >
+      <if test="pInsitute != null">
         #{pInsitute,jdbcType=VARCHAR},
       </if>
-      <if test="pProfiles != null" >
+      <if test="pProfiles != null">
         #{pProfiles,jdbcType=VARCHAR},
       </if>
-      <if test="pRemarks != null" >
+      <if test="pRemarks != null">
         #{pRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="pQq != null">
+        #{pQq,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.project.pojo.Projects" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.project.pojo.Projects">
     update projects
-    <set >
-      <if test="pNumber != null" >
+    <set>
+      <if test="pNumber != null">
         p_number = #{pNumber,jdbcType=VARCHAR},
       </if>
-      <if test="pName != null" >
+      <if test="pName != null">
         p_name = #{pName,jdbcType=VARCHAR},
       </if>
-      <if test="pGroup != null" >
+      <if test="pGroup != null">
         p_group = #{pGroup,jdbcType=VARCHAR},
       </if>
-      <if test="pGroupleader != null" >
+      <if test="pGroupleader != null">
         p_groupLeader = #{pGroupleader,jdbcType=VARCHAR},
       </if>
-      <if test="pTutor != null" >
+      <if test="pTutor != null">
         p_tutor = #{pTutor,jdbcType=VARCHAR},
       </if>
-      <if test="pFirsttutor != null" >
+      <if test="pFirsttutor != null">
         p_firstTutor = #{pFirsttutor,jdbcType=VARCHAR},
       </if>
-      <if test="pDeclaredate != null" >
+      <if test="pDeclaredate != null">
         p_declareDate = #{pDeclaredate,jdbcType=TIMESTAMP},
       </if>
-      <if test="pUpdatedate != null" >
-        p_updateDate = now(),
+      <if test="pUpdatedate != null">
+        now(),
       </if>
-      <if test="pInsitute != null" >
+      <if test="pInsitute != null">
         p_insitute = #{pInsitute,jdbcType=VARCHAR},
       </if>
-      <if test="pProfiles != null" >
+      <if test="pProfiles != null">
         p_profiles = #{pProfiles,jdbcType=VARCHAR},
       </if>
-      <if test="pRemarks != null" >
+      <if test="pRemarks != null">
         p_remarks = #{pRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="pQq != null">
+        p_qq = #{pQq,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.project.pojo.Projects" >
+  <update id="updateByPrimaryKey" parameterType="com.project.pojo.Projects">
     update projects
     set p_number = #{pNumber,jdbcType=VARCHAR},
       p_name = #{pName,jdbcType=VARCHAR},
@@ -173,12 +183,13 @@
       p_updateDate = now(),
       p_insitute = #{pInsitute,jdbcType=VARCHAR},
       p_profiles = #{pProfiles,jdbcType=VARCHAR},
-      p_remarks = #{pRemarks,jdbcType=VARCHAR}
+      p_remarks = #{pRemarks,jdbcType=VARCHAR},
+      p_qq = #{pQq,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="selectAllProject" resultType="int" resultMap="BaseResultMap">
-    select <include refid="Base_Column_List"/>
+  <select id="selectAllProject" resultMap="BaseResultMap" resultType="int">
+    select <include refid="Base_Column_List" />
     from projects
   </select>
 
@@ -190,39 +201,42 @@
 
   <update id="updateByProjectIdAndTeacherNumber" parameterType="com.project.pojo.Projects">
     update projects
-    <set >
-      <if test="pNumber != null" >
+    <set>
+      <if test="pNumber != null">
         p_number = #{pNumber,jdbcType=VARCHAR},
       </if>
-      <if test="pName != null" >
+      <if test="pName != null">
         p_name = #{pName,jdbcType=VARCHAR},
       </if>
-      <if test="pGroup != null" >
+      <if test="pGroup != null">
         p_group = #{pGroup,jdbcType=VARCHAR},
       </if>
-      <if test="pGroupleader != null" >
+      <if test="pGroupleader != null">
         p_groupLeader = #{pGroupleader,jdbcType=VARCHAR},
       </if>
-      <if test="pTutor != null" >
+      <if test="pTutor != null">
         p_tutor = #{pTutor,jdbcType=VARCHAR},
       </if>
-      <if test="pFirsttutor != null" >
+      <if test="pFirsttutor != null">
         p_firstTutor = #{pFirsttutor,jdbcType=VARCHAR},
       </if>
-      <if test="pDeclaredate != null" >
+      <if test="pDeclaredate != null">
         p_declareDate = #{pDeclaredate,jdbcType=TIMESTAMP},
       </if>
-      <if test="pUpdatedate != null" >
+      <if test="pUpdatedate != null">
         p_updateDate = now(),
       </if>
-      <if test="pInsitute != null" >
+      <if test="pInsitute != null">
         p_insitute = #{pInsitute,jdbcType=VARCHAR},
       </if>
-      <if test="pProfiles != null" >
+      <if test="pProfiles != null">
         p_profiles = #{pProfiles,jdbcType=VARCHAR},
       </if>
-      <if test="pRemarks != null" >
+      <if test="pRemarks != null">
         p_remarks = #{pRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="pQq != null">
+        p_qq = #{pQq,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -230,13 +244,13 @@
   </update>
 
   <select id="selectByStatus" parameterType="string" resultMap="BaseResultMap">
-    select <include refid="Base_Column_List"/>
+    select <include refid="Base_Column_List" />
     from projects
     where  p_remarks = #{status}
   </select>
 
   <select id="selectByFirstTutor" parameterType="string" resultMap="BaseResultMap">
-    select <include refid="Base_Column_List"/>
+    select <include refid="Base_Column_List" />
     from projects
     where p_firstTutor = #{gettNumber}
 
@@ -245,16 +259,3 @@
 
 
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -267,6 +267,11 @@
     from students
     where s_number = #{number}
   </select>
+
+  <select id="selectAllStudents" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from students
+  </select>
 </mapper>
 
 

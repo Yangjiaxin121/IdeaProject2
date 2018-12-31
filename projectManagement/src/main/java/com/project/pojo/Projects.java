@@ -27,7 +27,9 @@ public class Projects {
 
     private String pRemarks;
 
-    public Projects(Integer id, String pNumber, String pName, String pGroup, String pGroupleader, String pTutor, String pFirsttutor, Date pDeclaredate, Date pUpdatedate, String pInsitute, String pProfiles, String pRemarks) {
+    private String pQq;
+
+    public Projects(Integer id, String pNumber, String pName, String pGroup, String pGroupleader, String pTutor, String pFirsttutor, Date pDeclaredate, Date pUpdatedate, String pInsitute, String pProfiles, String pRemarks, String pQq) {
         this.id = id;
         this.pNumber = pNumber;
         this.pName = pName;
@@ -40,6 +42,7 @@ public class Projects {
         this.pInsitute = pInsitute;
         this.pProfiles = pProfiles;
         this.pRemarks = pRemarks;
+        this.pQq = pQq;
     }
 
     public Projects() {
@@ -140,5 +143,13 @@ public class Projects {
 
     public void setpRemarks(String pRemarks) {
         this.pRemarks = pRemarks == null ? null : pRemarks.trim();
+    }
+
+    public String getpQq() {
+        return pQq;
+    }
+
+    public void setpQq(String pQq) {
+        this.pQq = pQq == null ? null : pQq.trim();
     }
 }

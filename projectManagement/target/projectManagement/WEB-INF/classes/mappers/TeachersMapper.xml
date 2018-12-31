@@ -238,6 +238,11 @@
     from teachers
     where t_number = #{number}
   </select>
+
+  <select id="selectAllTeachers" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from teachers
+  </select>
 </mapper>
 
 

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title><%= htmlWebpackPlugin.options.title%></title>
+		    <script src="https://cdn.bootcss.com/jquery/1.8.3/jquery.min.js"></script>
+		<style type="text/css">
+.page-wrap{
+    padding: 40px 0;
+    background: #e72955;
+}
+/* 表单框 */
+.user-con{
+    position: relative;
+    margin: 0 auto;
+    width: 400px;
+    background: #fff;
+}
+.user-con .user-title{
+    text-align: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    font-size: 18px;
+    font-weight: bold;
+    color: #666;
+}
+.user-con .user-box{
+    padding: 20px;
+}
+/* 错误提示框 */
+.user-con .user-box .error-item{
+    position: relative;
+    padding: 4px 0 4px 40px;
+    margin-bottom: 10px;
+    border: 1px solid red;
+    color: red;
+    background: #fde9e9;
+    display: none;
+}
+/* 错误图标 */
+.user-con .user-box .error-icon{
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    font-size: 14px;
+    margin-top: -7px;
+}
+
+.user-con .user-item{
+    position: relative;
+    margin-bottom: 20px;
+}
+.user-con .user-item .user-label{
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    bottom: 1px;
+    width: 40px;
+    line-height: 36px;
+    background: #f3f3f3;
+    font-size: 18px;
+    color: #d3d3d3;
+    text-align: center;
+    border-right: 1px solid #bdbdbd;
+}
+.user-con .user-item .user-content{
+    padding: 10px 0 10px 50px;
+    width: 308px;
+    height: 18px;
+    line-height: 18px;
+    font-size: 15px;
+    border: 1px solid #bdbdbd;
+    outline: none;
+}
+.user-con .btn-submit{
+    width: 100%;
+    padding: 2px 0;
+    text-align: center;
+    font-size: 20px;
+}
+/* 跳转链接 */
+.user-con .link-item{
+    text-align: right;
+    margin-top: 10px;
+}
+.user-con .link-item .link{
+    margin-left: 10px;
+    color: #999;
+	}
+.btn{
+    display: inline-block;
+    width: 20px;
+    height: 28px;
+    line-height: 28px;
+    border: 1px solid #ddd;
+    vertical-align: middle;
+    cursor: pointer;
+    background: #fff;
+    -moz-user-select : none;
+    -webkit-user-select : none;
+    -ms-user-select : none;
+    user-select : none;
+}
+
+		</style>
+		<script>
+            var conf = {
+    serverHost : 'http://localhost:8080'
+    };
+			var _mm = {
+    // 网络请求
+    request : function(param){
+        var _this = this;
+        $.ajax({
+            type        : param.method  || 'post',
+            url         : param.url     || '',
+            dataType    : param.type    || 'json',
+            data        : param.data    || '',
+            success     : function(res){
+                // 请求成功
+                if(0 === res.status){
+                    typeof param.success === 'function' && param.success(res.data, res.msg);
+                }
+                // 没有登录状态，需要强制登录
+                else if(10 === res.status){
+                    _this.doLogin();
+                }
+                // 请求数据错误
+                else if(1 === res.status){
+                    typeof param.error === 'function' && param.error(res.msg);
+                }
+            },
+            error       : function(err){
+               // alert("123");
+                typeof param.error === 'function' && param.error(err.statusText);
+            }
+        });
+    },
+    // 获取服务器地址
+    getServerUrl : function(path){
+        return conf.serverHost + path;
+    },
+    // 获取url参数
+    getUrlParam : function(name){
+        var reg     = new RegExp('(^|&)' + name + '=([^&]*)(&|$)');
+        var result  = window.location.search.substr(1).match(reg);
+        return result ? decodeURIComponent(result[2]) : null;
+    },
+    // 渲染html模板
+    renderHtml : function(htmlTemplate, data){
+        var template    = Hogan.compile(htmlTemplate),
+            result      = template.render(data);
+        return result;
+    },
+    // 成功提示
+    successTips : function(msg){
+        alert(msg || '操作成功！');
+    },
+    // 错误提示
+    errorTips : function(msg){
+        alert(msg || '哪里不对了~');
+    },
+    // 字段的验证，支持非空、手机、邮箱的判断
+    validate : function(value, type){
+        var value = $.trim(value);
+        // 非空验证
+        if('require' === type){
+            return !!value;
+        }
+        // 手机号验证
+        if('phone' === type){
+            return /^1\d{10}$/.test(value);
+        }
+        // 邮箱格式验证
+        if('email' === type){
+            return /^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/.test(value);
+        }
+    },
+    // 统一登录处理
+    doLogin : function(){
+        window.location.href = './user-login.html?redirect=' + encodeURIComponent(window.location.href);
+    },
+    goHome : function(){
+        window.location.href = './index.html';
+    }
+};
+
+var _user = {
+    // 用户登录
+    login : function(userInfo, resolve, reject){
+        _mm.request({
+            url     : _mm.getServerUrl('/user/login.do'),
+            data    : userInfo,
+            method  : 'POST',
+            success : resolve,
+            error   : reject
+        });
+    },
+    // 检查用户名
+    checkUsername : function(username, resolve, reject){
+        _mm.request({
+            url     : _mm.getServerUrl('/user/check_valid.do'),
+            data    : {
+                type    : 'username',
+                str     : username
+            },
+            method  : 'POST',
+            success : resolve,
+            error   : reject
+        });
+    },
+    // 用户注册
+    register : function(userInfo, resolve, reject){
+        _mm.request({
+            url     : _mm.getServerUrl('/user/register.do'),
+            data    : userInfo,
+            method  : 'POST',
+            success : resolve,
+            error   : reject
+        });
+    },
+    // 检查登录状态
+    checkLogin : function(resolve, reject){
+        _mm.request({
+            url     : _mm.getServerUrl('/user/get_user_info.do'),
+            method  : 'POST',
+            success : resolve,
+            error   : reject
+        });
+    },
+    // 获取用户密码提示问题
+    getQuestion : function(username, resolve, reject){
+        _mm.request({
+            url     : _mm.getServerUrl('/user/forget_get_question.do'),
+            data    : {
+                username : username
+            },
+            method  : 'POST',
+            success : resolve,
+            error   : reject
+        });
+    },
+    // 检查密码提示问题答案
+    checkAnswer : function(userInfo, resolve, reject){
+        _mm.request({
+            url     : _mm.getServerUrl('/user/forget_check_answer.do'),
+            data    : userInfo,
+            method  : 'POST',
+            success : resolve,
+            error   : reject
+        });
+    },
+    // 重置密码
+    resetPassword : function(userInfo, resolve, reject){
+        _mm.request({
+            url     : _mm.getServerUrl('/user/forget_reset_password.do'),
+            data    : userInfo,
+            method  : 'POST',
+            success : resolve,
+            error   : reject
+        });
+    },
+    // 获取用户信息
+    getUserInfo : function(resolve, reject){
+        _mm.request({
+            url     : _mm.getServerUrl('/user/get_information.do'),
+            method  : 'POST',
+            success : resolve,
+            error   : reject
+        });
+    },
+    // 更新个人信息
+    updateUserInfo : function(userInfo, resolve, reject){
+        _mm.request({
+            url     : _mm.getServerUrl('/user/update_information.do'),
+            data    : userInfo,
+            method  : 'POST',
+            success : resolve,
+            error   : reject
+        });
+    },
+    // 登录状态下更新密码
+    updatePassword : function(userInfo, resolve, reject){
+        _mm.request({
+            url     : _mm.getServerUrl('/user/reset_password.do'),
+            data    : userInfo,
+            method  : 'POST',
+            success : resolve,
+            error   : reject
+        });
+    },
+    // 登出
+    logout : function(resolve, reject){
+        _mm.request({
+            url     : _mm.getServerUrl('/user/logout.do'),
+            method  : 'POST',
+            success : resolve,
+            error   : reject
+        });
+    }
+}
+var formError = {
+    show : function(errMsg){
+        $('.error-item').show().find('.err-msg').text(errMsg);
+    },
+    hide : function(){
+        $('.error-item').hide().find('.err-msg').text('');
+    }
+};
+
+// page 逻辑部分
+var page = {
+    init: function(){
+        this.bindEvent();
+    },
+    bindEvent : function(){
+        var _this = this;
+        // 登录按钮的点击
+        $('#submit').click(function(){
+            _this.submit();
+        });
+        // 如果按下回车，也进行提交
+        $('.user-content').keyup(function(e){
+            // keyCode == 13 表示回车键
+            if(e.keyCode === 13){
+                _this.submit();
+            }
+        });
+    },
+    // 提交表单
+    submit : function(){
+        var formData = {
+                username : $.trim($('#username').val()),
+                password : $.trim($('#password').val())
+            },
+            // 表单验证结果
+            validateResult = this.formValidate(formData);
+        // 验证成功
+        if(validateResult.status){
+            _user.login(formData, function(res){
+                window.location.href = _mm.getUrlParam('redirect') || './index.html';
+            }, function(errMsg){
+                formError.show(errMsg);
+            });
+        }
+        // 验证失败
+        else{
+            // 错误提示
+            formError.show(validateResult.msg);
+        }
+
+    },
+    // 表单字段的验证
+    formValidate : function(formData){
+        var result = {
+            status  : false,
+            msg     : ''
+        };
+        if(!_mm.validate(formData.username, 'require')){
+            result.msg = '用户名不能为空';
+            return result;
+        }
+        if(!_mm.validate(formData.password, 'require')){
+            result.msg = '密码不能为空';
+            return result;
+        }
+        // 通过验证，返回正确提示
+        result.status   = true;
+        result.msg      = '验证通过';
+        return result;
+    }
+};
+$(function(){
+    page.init();
+});
+		</script>
+    </head>
+    <body>
+        <%= require('html-loader!./layout/nav-simple.html')  %>
+        <div class="page-wrap">
+            <div class="w">
+                <div class="user-con">
+                    <div class="user-title">用户登录</div>
+                    <div class="user-box">
+                        <div class="error-item">
+                            <i class="fa fa-minus-circle error-icon"></i>
+                            <p class="err-msg">Error</p>
+                        </div>
+                        <div class="user-item">
+                            <label class="user-label" for="">
+                                <i class="fa fa-user"></i>
+                            </label>
+                            <input class="user-content" id="username" placeholder="请输入用户名" autocomplete="off">
+                        </div>
+                        <div class="user-item">
+                            <label class="user-label" for="password">
+                                <i class="fa fa-lock"></i>
+                            </label>
+                            <input type="password" class="user-content" id="password" placeholder="请输入密码" autocomplete="off">
+                        </div>
+                        <a class="btn btn-submit" id="submit">登录</a>
+                        <div class="link-item">
+                            <a class="link" href="./user-pass-reset.html" target="_blank">忘记密码</a>
+                            <a class="link" href="./user-register.html" target="_blank">免费注册</a>
+                        </div>
+                    </div>  
+                </div>                
+            </div>
+        </div>
+        <%= require('html-loader!./layout/footer.html')  %>
+    </body>
+</html>

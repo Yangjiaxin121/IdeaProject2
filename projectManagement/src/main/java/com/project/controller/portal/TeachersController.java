@@ -194,6 +194,20 @@ public class TeachersController {
     }
 
 
+    @RequestMapping(value = "delete_student_by_StudentNumber.do", method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse deleteStudentByStudentNumber(HttpSession session, Integer projectId, String studentNumber){
+        Object object = session.getAttribute(Const.CURRENT_USER);
+        if (!(object instanceof Teachers)){
+            return ServerResponse.createByErrorMessage("无权限");
+        }
+        //Teachers teachers = (Teachers) session.getAttribute(Const.CURRENT_USER);
+        Teachers teachers = (Teachers) object;
+        if (teachers == null){
+            return ServerResponse.createByErrorMessage("用户未登录,请登录");
+        }
+        return iTeacherService.deleteStudentByStudentNumber(teachers,studentNumber,projectId);
+    }
 
 }
 

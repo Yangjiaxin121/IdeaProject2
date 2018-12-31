@@ -21,6 +21,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -146,12 +147,15 @@ public class IAdminServiceImpl implements IAdminService {
      * @return
      */
     public ServerResponse getStudent(String number){
+        List<StudentVo> list=new ArrayList();
         if (number == null){
             return ServerResponse.createByErrorMessage("number不能为空");
         }
         Students students = studentsMapper.selectByNumber(number);
         if (students != null){
-            return ServerResponse.createBySuccess("查询成功",students);
+            StudentVo studentVo = assembleStudentVo(students);
+            list.add(studentVo);
+            return ServerResponse.createBySuccess("查询成功",list);
         }
         return ServerResponse.createByErrorMessage("查无此人");
     }
@@ -178,12 +182,15 @@ public class IAdminServiceImpl implements IAdminService {
      * @return
      */
     public ServerResponse getTeacher(String number){
+        List <TeacherVo>list = new ArrayList();
         if (number == null){
             return ServerResponse.createByErrorMessage("number不能为空");
         }
         Teachers teachers = teachersMapper.selectByNumber(number);
         if (teachers != null){
-            return ServerResponse.createBySuccess("查询成功",teachers);
+            TeacherVo teacherVo = assembleTeacherVo(teachers);
+            list.add(teacherVo);
+            return ServerResponse.createBySuccess("查询成功",list);
         }
         return ServerResponse.createByErrorMessage("查无此人");
     }
@@ -348,6 +355,34 @@ public class IAdminServiceImpl implements IAdminService {
 
         return ServerResponse.createBySuccess(projectsList);
 
+    }
+
+    /**
+     * 获取所有老师
+     * @return
+     */
+    public ServerResponse getAllTeachers(){
+        List<Teachers> teachersList = teachersMapper.selectAllTeachers();
+        List<TeacherVo> teacherVoList = Lists.newArrayList();
+        for (Teachers teacher:teachersList) {
+            TeacherVo teacherVo = assembleTeacherVo(teacher);
+            teacherVoList.add(teacherVo);
+        }
+        return ServerResponse.createBySuccess(teacherVoList);
+    }
+
+    /**
+     * 获取所有学生
+     * @return
+     */
+    public ServerResponse getAllStudents(){
+        List<Students> studentsList = studentsMapper.selectAllStudents();
+        List<StudentVo> studentVoList = Lists.newArrayList();
+        for (Students student:studentsList) {
+            StudentVo studentVo = assembleStudentVo(student);
+            studentVoList.add(studentVo);
+        }
+        return ServerResponse.createBySuccess(studentVoList);
     }
 
 
