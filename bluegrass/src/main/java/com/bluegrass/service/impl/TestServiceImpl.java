@@ -5,6 +5,7 @@ import com.bluegrass.dao.DepressionTestMapper;
 import com.bluegrass.dao.UserMapper;
 import com.bluegrass.pojo.DepressionTest;
 import com.bluegrass.pojo.User;
+import com.bluegrass.python.ThriftClient;
 import com.bluegrass.service.ITestService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -93,11 +94,18 @@ public class TestServiceImpl implements ITestService {
      * @param result
      * @return
      */
-    public ServerResponse saveResult(User user, Integer result){
+    public ServerResponse saveResult(User user, Double result, String word){
         if (result == null){
             return ServerResponse.createByErrorMessage("result不能为空");
         }
-        Integer newResult = result/45*100;      //根据公式计算result
+        Double newResult = result/45*100;      //根据公式计算result
+        String string = ThriftClient.startClient(word);
+        String[] array = string.split(",");
+        if (array[0].equals("-1")){
+            newResult = newResult + Double.valueOf(array[1])*10;
+        } else if (array[0].equals("1")){
+            newResult = newResult - Double.valueOf(array[1])*10;
+        }
         int count  = userMapper.updateResultByUserId(user.getUserId(),String.valueOf(newResult));
         if (count > 0){
             return ServerResponse.createBySuccess("保存成功");

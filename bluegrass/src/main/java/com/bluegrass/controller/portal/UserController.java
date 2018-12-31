@@ -24,9 +24,9 @@ public class UserController {
 
     @RequestMapping(value = "login.do", method = RequestMethod.POST)
     @ResponseBody
-    public ServerResponse<User> login(String userName, String userPassword, HttpSession session){
-        System.out.println("userPassword:"+userPassword);
-        ServerResponse<User> response =  iUserService.login(userName,userPassword);
+    public ServerResponse<User> login(String username, String password, HttpSession session){
+        System.out.println("userPassword:"+password);
+        ServerResponse<User> response =  iUserService.login(username,password);
         if (response.isSuccess()){
             session.setAttribute(Const.CURRENT_USER,response.getData());
         }

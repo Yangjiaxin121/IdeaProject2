@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.bluegrass.service.impl.ArticleServiceImpl</OriginalElement>
+  <nodes>
+    <node x="3.75" y="55.0">org.springframework.stereotype.Service</node>
+    <node x="174.75" y="0.0">com.bluegrass.service.IArticleService</node>
+    <node x="0.0" y="211.0">com.bluegrass.service.impl.ArticleServiceImpl</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.bluegrass.service.impl.ArticleServiceImpl" target="com.bluegrass.service.IArticleService">
+      <point x="127.0" y="-114.0" />
+      <point x="381.0" y="186.0" />
+      <point x="428.75" y="186.0" />
+      <point x="0.0" y="80.5" />
+    </edge>
+    <edge source="com.bluegrass.service.impl.ArticleServiceImpl" target="org.springframework.stereotype.Service">
+      <point x="-127.0" y="-114.0" />
+      <point x="127.0" y="186.0" />
+      <point x="79.25" y="186.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="254.0" y="203.5" />
+  <SelectedNodes>
+    <node>com.bluegrass.service.impl.ArticleServiceImpl</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Methods</Category>
+    <Category>Constructors</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

@@ -1,3 +1,5 @@
+package com.bluegrass.python;
+
 import org.apache.thrift.TApplicationException;
 import org.apache.thrift.TBase;
 
@@ -13,13 +15,13 @@ public class Hello {
 
   public interface Iface {
 
-    public java.lang.String helloString(java.lang.String word) throws org.apache.thrift.TException;
+    public String helloString(String word) throws org.apache.thrift.TException;
 
   }
 
   public interface AsyncIface {
 
-    public void helloString(java.lang.String word, org.apache.thrift.async.AsyncMethodCallback<java.lang.String> resultHandler) throws org.apache.thrift.TException;
+    public void helloString(String word, org.apache.thrift.async.AsyncMethodCallback<String> resultHandler) throws org.apache.thrift.TException;
 
   }
 
@@ -43,27 +45,27 @@ public class Hello {
       super(iprot, oprot);
     }
 
-    public java.lang.String helloString(java.lang.String word) throws org.apache.thrift.TException
+    public String helloString(String word) throws org.apache.thrift.TException
     {
       send_helloString(word);
       return recv_helloString();
     }
 
-    public void send_helloString(java.lang.String word) throws org.apache.thrift.TException
+    public void send_helloString(String word) throws org.apache.thrift.TException
     {
       helloString_args args = new helloString_args();
       args.setWord(word);
       sendBase("helloString", args);
     }
 
-    public java.lang.String recv_helloString() throws org.apache.thrift.TException
+    public String recv_helloString() throws org.apache.thrift.TException
     {
       helloString_result result = new helloString_result();
       receiveBase(result, "helloString");
       if (result.isSetSuccess()) {
         return result.success;
       }
-      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "helloString failed: unknown result");
+      throw new TApplicationException(TApplicationException.MISSING_RESULT, "helloString failed: unknown result");
     }
 
   }
@@ -84,16 +86,16 @@ public class Hello {
       super(protocolFactory, clientManager, transport);
     }
 
-    public void helloString(java.lang.String word, org.apache.thrift.async.AsyncMethodCallback<java.lang.String> resultHandler) throws org.apache.thrift.TException {
+    public void helloString(String word, org.apache.thrift.async.AsyncMethodCallback<String> resultHandler) throws org.apache.thrift.TException {
       checkReady();
       helloString_call method_call = new helloString_call(word, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class helloString_call extends org.apache.thrift.async.TAsyncMethodCall<java.lang.String> {
-      private java.lang.String word;
-      public helloString_call(java.lang.String word, org.apache.thrift.async.AsyncMethodCallback<java.lang.String> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+    public static class helloString_call extends org.apache.thrift.async.TAsyncMethodCall<String> {
+      private String word;
+      public helloString_call(String word, org.apache.thrift.async.AsyncMethodCallback<String> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.word = word;
       }
@@ -106,9 +108,9 @@ public class Hello {
         prot.writeMessageEnd();
       }
 
-      public java.lang.String getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
-          throw new java.lang.IllegalStateException("Method call not finished!");
+      public String getResult() throws org.apache.thrift.TException {
+        if (getState() != State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
@@ -121,14 +123,14 @@ public class Hello {
   public static class Processor<I extends Iface> extends org.apache.thrift.TBaseProcessor<I> implements org.apache.thrift.TProcessor {
     private static final org.slf4j.Logger _LOGGER = org.slf4j.LoggerFactory.getLogger(Processor.class.getName());
     public Processor(I iface) {
-      super(iface, getProcessMap(new java.util.HashMap<java.lang.String, org.apache.thrift.ProcessFunction<I, ? extends org.apache.thrift.TBase>>()));
+      super(iface, getProcessMap(new java.util.HashMap<String, org.apache.thrift.ProcessFunction<I, ? extends TBase>>()));
     }
 
-    protected Processor(I iface, java.util.Map<java.lang.String, org.apache.thrift.ProcessFunction<I, ? extends org.apache.thrift.TBase>> processMap) {
+    protected Processor(I iface, java.util.Map<String, org.apache.thrift.ProcessFunction<I, ? extends TBase>> processMap) {
       super(iface, getProcessMap(processMap));
     }
 
-    private static <I extends Iface> java.util.Map<java.lang.String,  org.apache.thrift.ProcessFunction<I, ? extends org.apache.thrift.TBase>> getProcessMap(java.util.Map<java.lang.String, org.apache.thrift.ProcessFunction<I, ? extends  org.apache.thrift.TBase>> processMap) {
+    private static <I extends Iface> java.util.Map<String,  org.apache.thrift.ProcessFunction<I, ? extends TBase>> getProcessMap(java.util.Map<String, org.apache.thrift.ProcessFunction<I, ? extends  TBase>> processMap) {
       processMap.put("helloString", new helloString());
       return processMap;
     }
@@ -163,19 +165,19 @@ public class Hello {
   public static class AsyncProcessor<I extends AsyncIface> extends org.apache.thrift.TBaseAsyncProcessor<I> {
     private static final org.slf4j.Logger _LOGGER = org.slf4j.LoggerFactory.getLogger(AsyncProcessor.class.getName());
     public AsyncProcessor(I iface) {
-      super(iface, getProcessMap(new java.util.HashMap<java.lang.String, org.apache.thrift.AsyncProcessFunction<I, ? extends org.apache.thrift.TBase, ?>>()));
+      super(iface, getProcessMap(new java.util.HashMap<String, org.apache.thrift.AsyncProcessFunction<I, ? extends TBase, ?>>()));
     }
 
-    protected AsyncProcessor(I iface, java.util.Map<java.lang.String,  org.apache.thrift.AsyncProcessFunction<I, ? extends  org.apache.thrift.TBase, ?>> processMap) {
+    protected AsyncProcessor(I iface, java.util.Map<String,  org.apache.thrift.AsyncProcessFunction<I, ? extends  TBase, ?>> processMap) {
       super(iface, getProcessMap(processMap));
     }
 
-    private static <I extends AsyncIface> java.util.Map<java.lang.String,  org.apache.thrift.AsyncProcessFunction<I, ? extends  org.apache.thrift.TBase,?>> getProcessMap(java.util.Map<java.lang.String,  org.apache.thrift.AsyncProcessFunction<I, ? extends  org.apache.thrift.TBase, ?>> processMap) {
+    private static <I extends AsyncIface> java.util.Map<String,  org.apache.thrift.AsyncProcessFunction<I, ? extends  TBase,?>> getProcessMap(java.util.Map<String,  org.apache.thrift.AsyncProcessFunction<I, ? extends  TBase, ?>> processMap) {
       processMap.put("helloString", new helloString());
       return processMap;
     }
 
-    public static class helloString<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, helloString_args, java.lang.String> {
+    public static class helloString<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, helloString_args, String> {
       public helloString() {
         super("helloString");
       }
@@ -184,10 +186,10 @@ public class Hello {
         return new helloString_args();
       }
 
-      public org.apache.thrift.async.AsyncMethodCallback<java.lang.String> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
+      public org.apache.thrift.async.AsyncMethodCallback<String> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new org.apache.thrift.async.AsyncMethodCallback<java.lang.String>() { 
-          public void onComplete(java.lang.String o) {
+        return new org.apache.thrift.async.AsyncMethodCallback<String>() {
+          public void onComplete(String o) {
             helloString_result result = new helloString_result();
             result.success = o;
             try {
@@ -195,12 +197,12 @@ public class Hello {
             } catch (org.apache.thrift.transport.TTransportException e) {
               _LOGGER.error("TTransportException writing to internal frame buffer", e);
               fb.close();
-            } catch (java.lang.Exception e) {
+            } catch (Exception e) {
               _LOGGER.error("Exception writing to internal frame buffer", e);
               onError(e);
             }
           }
-          public void onError(java.lang.Exception e) {
+          public void onError(Exception e) {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             TApplicationException msg;
             helloString_result result = new helloString_result();
@@ -208,18 +210,18 @@ public class Hello {
               _LOGGER.error("TTransportException inside handler", e);
               fb.close();
               return;
-            } else if (e instanceof org.apache.thrift.TApplicationException) {
+            } else if (e instanceof TApplicationException) {
               _LOGGER.error("TApplicationException inside handler", e);
               msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
-              msg = (org.apache.thrift.TApplicationException)e;
+              msg = (TApplicationException)e;
             } else {
               _LOGGER.error("Exception inside handler", e);
               msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
-              msg = new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+              msg = new TApplicationException(TApplicationException.INTERNAL_ERROR, e.getMessage());
             }
             try {
               fcall.sendResponse(fb, (TBase) msg,msgType,seqid);
-            } catch (java.lang.Exception ex) {
+            } catch (Exception ex) {
               _LOGGER.error("Exception writing to internal frame buffer", ex);
               fb.close();
             }
@@ -231,14 +233,14 @@ public class Hello {
         return false;
       }
 
-      public void start(I iface, helloString_args args, org.apache.thrift.async.AsyncMethodCallback<java.lang.String> resultHandler) throws org.apache.thrift.TException {
+      public void start(I iface, helloString_args args, org.apache.thrift.async.AsyncMethodCallback<String> resultHandler) throws org.apache.thrift.TException {
         iface.helloString(args.word,resultHandler);
       }
     }
 
   }
 
-  public static class helloString_args implements org.apache.thrift.TBase<helloString_args, helloString_args._Fields>, java.io.Serializable, Cloneable, Comparable<helloString_args>   {
+  public static class helloString_args implements TBase<helloString_args, helloString_args._Fields>, java.io.Serializable, Cloneable, Comparable<helloString_args>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("helloString_args");
 
     private static final org.apache.thrift.protocol.TField WORD_FIELD_DESC = new org.apache.thrift.protocol.TField("word", org.apache.thrift.protocol.TType.STRING, (short)1);
@@ -246,13 +248,13 @@ public class Hello {
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new helloString_argsStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new helloString_argsTupleSchemeFactory();
 
-    public java.lang.String word; // required
+    public String word; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
       WORD((short)1, "word");
 
-      private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
+      private static final java.util.Map<String, _Fields> byName = new java.util.HashMap<String, _Fields>();
 
       static {
         for (_Fields field : java.util.EnumSet.allOf(_Fields.class)) {
@@ -278,21 +280,21 @@ public class Hello {
        */
       public static _Fields findByThriftIdOrThrow(int fieldId) {
         _Fields fields = findByThriftId(fieldId);
-        if (fields == null) throw new java.lang.IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
         return fields;
       }
 
       /**
        * Find the _Fields constant that matches name, or null if its not found.
        */
-      public static _Fields findByName(java.lang.String name) {
+      public static _Fields findByName(String name) {
         return byName.get(name);
       }
 
       private final short _thriftId;
-      private final java.lang.String _fieldName;
+      private final String _fieldName;
 
-      _Fields(short thriftId, java.lang.String fieldName) {
+      _Fields(short thriftId, String fieldName) {
         _thriftId = thriftId;
         _fieldName = fieldName;
       }
@@ -301,7 +303,7 @@ public class Hello {
         return _thriftId;
       }
 
-      public java.lang.String getFieldName() {
+      public String getFieldName() {
         return _fieldName;
       }
     }
@@ -310,7 +312,7 @@ public class Hello {
     public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-      tmpMap.put(_Fields.WORD, new org.apache.thrift.meta_data.FieldMetaData("word", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+      tmpMap.put(_Fields.WORD, new org.apache.thrift.meta_data.FieldMetaData("word", org.apache.thrift.TFieldRequirementType.DEFAULT,
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(helloString_args.class, metaDataMap);
@@ -320,7 +322,7 @@ public class Hello {
     }
 
     public helloString_args(
-      java.lang.String word)
+      String word)
     {
       this();
       this.word = word;
@@ -344,11 +346,11 @@ public class Hello {
       this.word = null;
     }
 
-    public java.lang.String getWord() {
+    public String getWord() {
       return this.word;
     }
 
-    public helloString_args setWord(java.lang.String word) {
+    public helloString_args setWord(String word) {
       this.word = word;
       return this;
     }
@@ -368,43 +370,43 @@ public class Hello {
       }
     }
 
-    public void setFieldValue(_Fields field, java.lang.Object value) {
+    public void setFieldValue(_Fields field, Object value) {
       switch (field) {
       case WORD:
         if (value == null) {
           unsetWord();
         } else {
-          setWord((java.lang.String)value);
+          setWord((String)value);
         }
         break;
 
       }
     }
 
-    public java.lang.Object getFieldValue(_Fields field) {
+    public Object getFieldValue(_Fields field) {
       switch (field) {
       case WORD:
         return getWord();
 
       }
-      throw new java.lang.IllegalStateException();
+      throw new IllegalStateException();
     }
 
     /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
     public boolean isSet(_Fields field) {
       if (field == null) {
-        throw new java.lang.IllegalArgumentException();
+        throw new IllegalArgumentException();
       }
 
       switch (field) {
       case WORD:
         return isSetWord();
       }
-      throw new java.lang.IllegalStateException();
+      throw new IllegalStateException();
     }
 
     @Override
-    public boolean equals(java.lang.Object that) {
+    public boolean equals(Object that) {
       if (that == null)
         return false;
       if (that instanceof helloString_args)
@@ -449,7 +451,7 @@ public class Hello {
 
       int lastComparison = 0;
 
-      lastComparison = java.lang.Boolean.valueOf(isSetWord()).compareTo(other.isSetWord());
+      lastComparison = Boolean.valueOf(isSetWord()).compareTo(other.isSetWord());
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -475,8 +477,8 @@ public class Hello {
     }
 
     @Override
-    public java.lang.String toString() {
-      java.lang.StringBuilder sb = new java.lang.StringBuilder("helloString_args(");
+    public String toString() {
+      StringBuilder sb = new StringBuilder("helloString_args(");
       boolean first = true;
 
       sb.append("word:");
@@ -503,7 +505,7 @@ public class Hello {
       }
     }
 
-    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
@@ -525,7 +527,7 @@ public class Hello {
         while (true)
         {
           schemeField = iprot.readFieldBegin();
-          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) {
             break;
           }
           switch (schemeField.id) {
@@ -533,7 +535,7 @@ public class Hello {
               if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
                 struct.word = iprot.readString();
                 struct.setWordIsSet(true);
-              } else { 
+              } else {
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
               break;
@@ -600,7 +602,7 @@ public class Hello {
     }
   }
 
-  public static class helloString_result implements org.apache.thrift.TBase<helloString_result, helloString_result._Fields>, java.io.Serializable, Cloneable, Comparable<helloString_result>   {
+  public static class helloString_result implements TBase<helloString_result, helloString_result._Fields>, java.io.Serializable, Cloneable, Comparable<helloString_result>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("helloString_result");
 
     private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRING, (short)0);
@@ -608,13 +610,13 @@ public class Hello {
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new helloString_resultStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new helloString_resultTupleSchemeFactory();
 
-    public java.lang.String success; // required
+    public String success; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
       SUCCESS((short)0, "success");
 
-      private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
+      private static final java.util.Map<String, _Fields> byName = new java.util.HashMap<String, _Fields>();
 
       static {
         for (_Fields field : java.util.EnumSet.allOf(_Fields.class)) {
@@ -640,21 +642,21 @@ public class Hello {
        */
       public static _Fields findByThriftIdOrThrow(int fieldId) {
         _Fields fields = findByThriftId(fieldId);
-        if (fields == null) throw new java.lang.IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
         return fields;
       }
 
       /**
        * Find the _Fields constant that matches name, or null if its not found.
        */
-      public static _Fields findByName(java.lang.String name) {
+      public static _Fields findByName(String name) {
         return byName.get(name);
       }
 
       private final short _thriftId;
-      private final java.lang.String _fieldName;
+      private final String _fieldName;
 
-      _Fields(short thriftId, java.lang.String fieldName) {
+      _Fields(short thriftId, String fieldName) {
         _thriftId = thriftId;
         _fieldName = fieldName;
       }
@@ -663,7 +665,7 @@ public class Hello {
         return _thriftId;
       }
 
-      public java.lang.String getFieldName() {
+      public String getFieldName() {
         return _fieldName;
       }
     }
@@ -672,7 +674,7 @@ public class Hello {
     public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT,
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(helloString_result.class, metaDataMap);
@@ -682,7 +684,7 @@ public class Hello {
     }
 
     public helloString_result(
-      java.lang.String success)
+      String success)
     {
       this();
       this.success = success;
@@ -706,11 +708,11 @@ public class Hello {
       this.success = null;
     }
 
-    public java.lang.String getSuccess() {
+    public String getSuccess() {
       return this.success;
     }
 
-    public helloString_result setSuccess(java.lang.String success) {
+    public helloString_result setSuccess(String success) {
       this.success = success;
       return this;
     }
@@ -730,43 +732,43 @@ public class Hello {
       }
     }
 
-    public void setFieldValue(_Fields field, java.lang.Object value) {
+    public void setFieldValue(_Fields field, Object value) {
       switch (field) {
       case SUCCESS:
         if (value == null) {
           unsetSuccess();
         } else {
-          setSuccess((java.lang.String)value);
+          setSuccess((String)value);
         }
         break;
 
       }
     }
 
-    public java.lang.Object getFieldValue(_Fields field) {
+    public Object getFieldValue(_Fields field) {
       switch (field) {
       case SUCCESS:
         return getSuccess();
 
       }
-      throw new java.lang.IllegalStateException();
+      throw new IllegalStateException();
     }
 
     /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
     public boolean isSet(_Fields field) {
       if (field == null) {
-        throw new java.lang.IllegalArgumentException();
+        throw new IllegalArgumentException();
       }
 
       switch (field) {
       case SUCCESS:
         return isSetSuccess();
       }
-      throw new java.lang.IllegalStateException();
+      throw new IllegalStateException();
     }
 
     @Override
-    public boolean equals(java.lang.Object that) {
+    public boolean equals(Object that) {
       if (that == null)
         return false;
       if (that instanceof helloString_result)
@@ -811,7 +813,7 @@ public class Hello {
 
       int lastComparison = 0;
 
-      lastComparison = java.lang.Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -837,8 +839,8 @@ public class Hello {
       }
 
     @Override
-    public java.lang.String toString() {
-      java.lang.StringBuilder sb = new java.lang.StringBuilder("helloString_result(");
+    public String toString() {
+      StringBuilder sb = new StringBuilder("helloString_result(");
       boolean first = true;
 
       sb.append("success:");
@@ -865,7 +867,7 @@ public class Hello {
       }
     }
 
-    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {

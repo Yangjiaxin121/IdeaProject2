@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.bluegrass.service.impl.TestServiceImpl</OriginalElement>
+  <nodes>
+    <node x="0.0" y="44.0">org.springframework.stereotype.Service</node>
+    <node x="30.25" y="189.0">com.bluegrass.service.impl.TestServiceImpl</node>
+    <node x="171.0" y="0.0">com.bluegrass.service.ITestService</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.bluegrass.service.impl.TestServiceImpl" target="org.springframework.stereotype.Service">
+      <point x="-93.0" y="-92.0" />
+      <point x="123.25" y="164.0" />
+      <point x="75.5" y="164.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="com.bluegrass.service.impl.TestServiceImpl" target="com.bluegrass.service.ITestService">
+      <point x="93.0" y="-92.0" />
+      <point x="309.25" y="164.0" />
+      <point x="357.0" y="164.0" />
+      <point x="0.0" y="69.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="117.0" y="122.5" />
+  <SelectedNodes>
+    <node>org.springframework.stereotype.Service</node>
+    <node>com.bluegrass.service.impl.TestServiceImpl</node>
+    <node>com.bluegrass.service.ITestService</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Methods</Category>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

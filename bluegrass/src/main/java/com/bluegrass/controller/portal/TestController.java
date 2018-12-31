@@ -34,11 +34,11 @@ public class TestController {
 
     @RequestMapping("save_result.do")
     @ResponseBody
-    public ServerResponse saveResult(HttpSession session, Integer result){
+    public ServerResponse saveResult(HttpSession session, Double result,String word){
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null){
             return ServerResponse.createByErrorMessage("用户未登录,请登录");
         }
-        return iTestService.saveResult(user,result);
+        return iTestService.saveResult(user,result,word);
     }
 }

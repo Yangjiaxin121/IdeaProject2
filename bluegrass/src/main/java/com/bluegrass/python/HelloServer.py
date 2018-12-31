@@ -1,4 +1,5 @@
-from hello import Hello
+from com.bluegrass.python.example2.Tecent_interface_test import get_content
+from com.bluegrass.python.hello import Hello
 from thrift.transport import TSocket
 from thrift.transport import TTransport
 from thrift.protocol import TBinaryProtocol
@@ -9,8 +10,9 @@ class HelloHandler:
      pass
 
     def helloString(self, word):
-        ret = "Received: " + word
-        return ret
+        polar,confd,text = get_content(word)
+        string = str(polar)+','+str(confd)
+        return string
 
 #handler processer类
 handler = HelloHandler()

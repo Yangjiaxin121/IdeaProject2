@@ -14,5 +14,5 @@ public interface ITestService {
 
     ServerResponse getTest(int pageNum, int pageSize);
 
-    ServerResponse saveResult(User user, Integer result);
+    ServerResponse saveResult(User user, Double result, String word);
     }
